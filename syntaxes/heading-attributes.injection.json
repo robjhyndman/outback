@@ -1,0 +1,7 @@
+{
+  "scopeName": "outback.heading-attributes.injection",
+  "injectionSelector": "L:entity.name.section",
+  "patterns": [
+    { "match": "\\{[^{}]*\\}\\s*$", "name": "meta.heading-attributes" }
+  ]
+}

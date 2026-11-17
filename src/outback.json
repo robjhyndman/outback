@@ -1,0 +1,982 @@
+{
+  "name": "Outback",
+  "type": "dark",
+  "author": "Rob Hyndman",
+  "semanticHighlighting": true,
+  "colors": {
+    "actionBar.toggledBackground": "$burnt",
+    "activityBar.activeBorder": "$saltpan",
+    "activityBar.background": "$night",
+    "activityBar.border": "$embers",
+    "activityBar.foreground": "$saltpan",
+    "activityBar.inactiveForeground": "$ash",
+    "activityBarBadge.background": "$ochre",
+    "activityBarBadge.foreground": "$night",
+    "agentsCard.border": "$black/00",
+    "agentsChatInput.border": "$embers",
+    "agentsChatInput.focusBorder": "$ochre",
+    "agentsNewSessionButton.border": "$embers",
+    "agentsPanel.border": "$embers",
+    "badge.background": "$spinifex",
+    "badge.foreground": "$charcoal",
+    "button.background": "$ochre",
+    "button.border": "$ochre",
+    "button.foreground": "$night",
+    "button.hoverBackground": "$ochre/e6",
+    "button.secondaryBackground": "$black/00",
+    "button.secondaryForeground": "$ghost-gum",
+    "button.secondaryHoverBackground": "$embers",
+    "chart.line": "$sky",
+    "chat.editedFileForeground": "$spinifex",
+    "chat.requestCodeBorder": "$sky/40",
+    "chat.slashCommandBackground": "$sky/66",
+    "chat.slashCommandForeground": "$sky",
+    "checkbox.background": "$embers",
+    "checkbox.border": "$burnt",
+    "debugIcon.continueForeground": "$sky",
+    "debugIcon.pauseForeground": "$sky",
+    "debugIcon.stepBackForeground": "$sky",
+    "debugIcon.stepIntoForeground": "$sky",
+    "debugIcon.stepOutForeground": "$sky",
+    "debugIcon.stepOverForeground": "$sky",
+    "debugTokenExpression.boolean": "$dusk",
+    "debugTokenExpression.type": "$waterhole",
+    "debugToolBar.background": "$ironbark",
+    "descriptionForeground": "$mulga",
+    "dropdown.background": "$embers",
+    "dropdown.border": "$burnt",
+    "dropdown.foreground": "$ghost-gum",
+    "dropdown.listBackground": "$charcoal",
+    "editor.background": "$charcoal",
+    "editor.findMatchBackground": "$wattle-seed/80",
+    "editor.findMatchBorder": "$wattle-seed",
+    "editor.findMatchHighlightBackground": "$wattle-seed/40",
+    "editor.foreground": "$ghost-gum",
+    "editor.inactiveSelectionBackground": "$saltpan",
+    "editor.lineHighlightBackground": "$embers",
+    "editor.lineHighlightBorder": "$embers",
+    "editor.rangeHighlightBackground": "$ghost-gum/0b",
+    "editor.selectionBackground": "$saltpan/33",
+    "editor.selectionHighlightBackground": "$saltpan/26",
+    "editor.stackFrameHighlightBackground": "$spinifex/33",
+    "editor.wordHighlightBackground": "$saltpan/26",
+    "editor.wordHighlightStrongBackground": "$sky/30",
+    "editorBracketHighlight.foreground1": "$sky",
+    "editorBracketHighlight.foreground2": "$wattle-seed",
+    "editorBracketHighlight.foreground3": "$desert-rose",
+    "editorBracketHighlight.foreground4": "$sky",
+    "editorBracketHighlight.foreground5": "$wattle-seed",
+    "editorBracketHighlight.foreground6": "$desert-rose",
+    "editorBracketMatch.background": "$sky/55",
+    "editorBracketMatch.border": "$burnt",
+    "editorCursor.foreground": "$saltpan",
+    "editorGhostText.foreground": "$smoke",
+    "editorGroup.border": "$ghost-gum/17",
+    "editorGroupHeader.tabsBackground": "$night",
+    "editorGroupHeader.tabsBorder": "$embers",
+    "editorGutter.addedBackground": "$new-growth",
+    "editorGutter.background": "$charcoal",
+    "editorGutter.deletedBackground": "$ochre",
+    "editorGutter.modifiedBackground": "$sky",
+    "editorHint.foreground": "$mulga",
+    "editorIndentGuide.activeBackground1": "$smoke",
+    "editorIndentGuide.background": "$burnt",
+    "editorIndentGuide.background1": "$burnt",
+    "editorInfo.foreground": "$sky",
+    "editorInlayHint.foreground": "$mulga",
+    "editorLightBulbAutoFix.foreground": "$sky",
+    "editorLineNumber.activeForeground": "$ghost-gum",
+    "editorLineNumber.foreground": "$smoke",
+    "editorLink.activeForeground": "$sky",
+    "editorOverviewRuler.border": "$night",
+    "editorSuggestWidget.selectedBackground": "$ochre/33",
+    "editorWarning.foreground": "$sunset",
+    "editorWhitespace.foreground": "$ash",
+    "editorWidget.background": "$charcoal",
+    "editorWidget.border": "$burnt",
+    "errorForeground": "$ochre",
+    "focusBorder": "$ochre",
+    "foreground": "$ghost-gum",
+    "gitDecoration.addedResourceForeground": "$new-growth",
+    "gitDecoration.conflictingResourceForeground": "$ochre",
+    "gitDecoration.deletedResourceForeground": "$ochre",
+    "gitDecoration.ignoredResourceForeground": "$smoke",
+    "gitDecoration.modifiedResourceForeground": "$spinifex",
+    "gitDecoration.stageDeletedResourceForeground": "$ochre",
+    "gitDecoration.stageModifiedResourceForeground": "$spinifex",
+    "gitDecoration.submoduleResourceForeground": "$sky",
+    "gitDecoration.untrackedResourceForeground": "$new-growth",
+    "icon.foreground": "$ghost-gum",
+    "input.background": "$embers",
+    "input.border": "$burnt",
+    "input.foreground": "$ghost-gum",
+    "input.placeholderForeground": "$mulga",
+    "inputOption.activeBackground": "$ochre/82",
+    "inputOption.activeBorder": "$ochre",
+    "inputValidation.infoBackground": "$embers",
+    "inputValidation.infoBorder": "$sky",
+    "keybindingLabel.foreground": "$ghost-gum",
+    "list.activeSelectionBackground": "$ochre/33",
+    "list.activeSelectionForeground": "$ghost-gum",
+    "list.activeSelectionIconForeground": "$ghost-gum",
+    "list.dropBackground": "$saltpan",
+    "list.focusHighlightForeground": "$spinifex",
+    "list.highlightForeground": "$spinifex",
+    "list.hoverBackground": "$embers",
+    "menu.background": "$charcoal",
+    "menu.border": "$burnt",
+    "menu.foreground": "$ghost-gum",
+    "menu.selectionBackground": "$ochre/59",
+    "menu.separatorBackground": "$burnt",
+    "modernActivityBar.border": "$embers",
+    "modernActivityBarItem.activeBackground": "$ghost-gum/22",
+    "modernActivityBarItem.hoverBackground": "$ghost-gum/11",
+    "notebook.selectedCellBackground": "$saltpan/50",
+    "notificationCenterHeader.background": "$charcoal",
+    "notificationCenterHeader.foreground": "$ghost-gum",
+    "notifications.background": "$charcoal",
+    "notifications.border": "$embers",
+    "notifications.foreground": "$ghost-gum",
+    "panel.background": "$night",
+    "panel.border": "$embers",
+    "panelInput.border": "$embers",
+    "panelTitle.activeBorder": "$ochre",
+    "panelTitle.activeForeground": "$ghost-gum",
+    "panelTitle.inactiveForeground": "$mulga",
+    "peekViewEditor.background": "$charcoal",
+    "peekViewEditor.matchHighlightBackground": "$wattle-seed/66",
+    "peekViewResult.background": "$charcoal",
+    "peekViewResult.matchHighlightBackground": "$wattle-seed/66",
+    "peekViewResult.selectionBackground": "$saltpan/33",
+    "pickerGroup.border": "$burnt",
+    "pickerGroup.foreground": "$sky",
+    "ports.iconRunningProcessForeground": "$new-growth",
+    "positronActionBar.textInputSelectionBackground": "$saltpan/40",
+    "positronDataExplorer.sparklineFill": "$sky",
+    "positronDataExplorer.sparklineStroke": "$sky",
+    "positronDataGrid.cursorBorder": "$ochre",
+    "positronDataGrid.selectionBorder": "$ochre",
+    "positronDataGrid.selectionInnerBorder": "$ochre/80",
+    "positronModalDialog.textInputSelectionBackground": "$saltpan/40",
+    "positronRuntime.stateIconActive": "$sky",
+    "positronSplitterExpandCollapseButton.foreground": "$sky",
+    "progressBar.background": "$ochre",
+    "quickInput.background": "$charcoal",
+    "quickInput.foreground": "$ghost-gum",
+    "scrollbarSlider.activeBackground": "$saltpan/66",
+    "scrollbarSlider.background": "$smoke/66",
+    "scrollbarSlider.hoverBackground": "$mulga/66",
+    "settings.dropdownBackground": "$embers",
+    "settings.dropdownBorder": "$burnt",
+    "settings.headerForeground": "$ghost-gum",
+    "settings.modifiedItemIndicator": "$wattle-seed/66",
+    "sideBar.background": "$night",
+    "sideBar.border": "$embers",
+    "sideBar.foreground": "$ghost-gum",
+    "sideBarSectionHeader.background": "$night",
+    "sideBarSectionHeader.border": "$embers",
+    "sideBarSectionHeader.foreground": "$ghost-gum",
+    "sideBarTitle.foreground": "$ghost-gum",
+    "statusBar.background": "$night",
+    "statusBar.border": "$embers",
+    "statusBar.debuggingBackground": "$ochre",
+    "statusBar.debuggingForeground": "$ghost-gum",
+    "statusBar.focusBorder": "$ochre",
+    "statusBar.foreground": "$ghost-gum",
+    "statusBar.inactiveBackground": "$charcoal",
+    "statusBar.noFolderBackground": "$charcoal",
+    "statusBarItem.focusBorder": "$ochre",
+    "statusBarItem.hoverBackground": "$ghost-gum/33",
+    "statusBarItem.hoverForeground": "$ghost-gum",
+    "statusBarItem.prominentBackground": "$smoke/66",
+    "statusBarItem.remoteBackground": "$ochre",
+    "statusBarItem.remoteForeground": "$night",
+    "surface.border": "$embers",
+    "symbolIcon.enumeratorMemberForeground": "$sky",
+    "symbolIcon.fieldForeground": "$sky",
+    "symbolIcon.interfaceForeground": "$sky",
+    "symbolIcon.variableForeground": "$sky",
+    "tab.activeBackground": "$charcoal",
+    "tab.activeBorder": "$charcoal",
+    "tab.activeBorderTop": "$ochre",
+    "tab.activeForeground": "$ghost-gum",
+    "tab.activeModifiedBorder": "$spinifex",
+    "tab.border": "$embers",
+    "tab.hoverBackground": "$charcoal",
+    "tab.inactiveBackground": "$night",
+    "tab.inactiveForeground": "$mulga",
+    "tab.lastPinnedBorder": "$ghost-gum/33",
+    "tab.selectedBackground": "$embers",
+    "tab.selectedBorderTop": "$ochre",
+    "tab.selectedForeground": "$ghost-gum",
+    "tab.unfocusedActiveBorder": "$charcoal",
+    "tab.unfocusedActiveBorderTop": "$embers",
+    "tab.unfocusedHoverBackground": "$charcoal",
+    "terminal.ansiBlack": "$night",
+    "terminal.ansiBlue": "$sunset",
+    "terminal.ansiBrightBlack": "$smoke",
+    "terminal.ansiBrightBlue": "$sunset",
+    "terminal.ansiBrightCyan": "$waterhole",
+    "terminal.ansiBrightGreen": "$new-growth",
+    "terminal.ansiBrightMagenta": "$dusk",
+    "terminal.ansiBrightRed": "$ochre",
+    "terminal.ansiBrightWhite": "$ghost-gum",
+    "terminal.ansiBrightYellow": "$spinifex",
+    "terminal.ansiCyan": "$waterhole",
+    "terminal.ansiGreen": "$new-growth",
+    "terminal.ansiMagenta": "$dusk",
+    "terminal.ansiRed": "$ochre",
+    "terminal.ansiWhite": "$ghost-gum",
+    "terminal.ansiYellow": "$spinifex",
+    "terminal.background": "$burnt",
+    "terminal.foreground": "$ghost-gum",
+    "terminal.inactiveSelectionBackground": "$saltpan",
+    "terminal.selectionBackground": "$ghost-gum/26",
+    "terminal.tab.activeBorder": "$ochre",
+    "terminalCommandDecoration.successBackground": "$new-growth",
+    "terminalCursor.foreground": "$ochre",
+    "textBlockQuote.background": "$embers",
+    "textBlockQuote.border": "$ash",
+    "textCodeBlock.background": "$embers",
+    "textLink.activeForeground": "$sky",
+    "textLink.foreground": "$sky",
+    "textPreformat.background": "$burnt",
+    "textPreformat.foreground": "$saltpan",
+    "textSeparator.foreground": "$embers",
+    "titleBar.activeBackground": "$night",
+    "titleBar.activeForeground": "$ghost-gum",
+    "titleBar.border": "$embers",
+    "titleBar.inactiveBackground": "$charcoal",
+    "titleBar.inactiveForeground": "$mulga",
+    "walkthroughActivityBarBadge.background": "$ochre",
+    "welcomePage.progress.foreground": "$ochre",
+    "welcomePage.tileBackground": "$embers",
+    "widget.border": "$embers"
+  },
+  "tokenColors": [
+    {
+      "scope": [
+        "meta.embedded",
+        "source.groovy.embedded",
+        "string meta.image.inline.markdown",
+        "variable.legacy.builtin.python"
+      ],
+      "settings": {
+        "foreground": "$ghost-gum"
+      }
+    },
+    {
+      "scope": "emphasis",
+      "settings": {
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "strong",
+      "settings": {
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "scope": "header",
+      "settings": {
+        "foreground": "$spinifex"
+      }
+    },
+    {
+      "scope": "comment",
+      "settings": {
+        "foreground": "$smoke"
+      }
+    },
+    {
+      "scope": "constant.language",
+      "settings": {
+        "foreground": "$dusk"
+      }
+    },
+    {
+      "scope": [
+        "constant.numeric",
+        "variable.other.enummember",
+        "keyword.operator.plus.exponent",
+        "keyword.operator.minus.exponent"
+      ],
+      "settings": {
+        "foreground": "$dusk"
+      }
+    },
+    {
+      "scope": "constant.regexp",
+      "settings": {
+        "foreground": "$mulga"
+      }
+    },
+    {
+      "scope": "entity.name.tag",
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.tag.css",
+        "entity.name.tag.less"
+      ],
+      "settings": {
+        "foreground": "$wattle-seed"
+      }
+    },
+    {
+      "scope": "entity.other.attribute-name",
+      "settings": {
+        "foreground": "$waterhole"
+      }
+    },
+    {
+      "scope": [
+        "entity.other.attribute-name.class.css",
+        "source.css entity.other.attribute-name.class",
+        "entity.other.attribute-name.id.css",
+        "entity.other.attribute-name.parent-selector.css",
+        "entity.other.attribute-name.parent.less",
+        "source.css entity.other.attribute-name.pseudo-class",
+        "entity.other.attribute-name.pseudo-element.css",
+        "source.css.less entity.other.attribute-name.id",
+        "entity.other.attribute-name.scss"
+      ],
+      "settings": {
+        "foreground": "$wattle-seed"
+      }
+    },
+    {
+      "scope": "invalid",
+      "settings": {
+        "foreground": "$ochre"
+      }
+    },
+    {
+      "scope": "markup.underline",
+      "settings": {
+        "fontStyle": "underline"
+      }
+    },
+    {
+      "scope": "markup.bold",
+      "settings": {
+        "fontStyle": "bold",
+        "foreground": "$wattle-seed"
+      }
+    },
+    {
+      "scope": "markup.heading",
+      "settings": {
+        "fontStyle": "bold",
+        "foreground": "$spinifex"
+      }
+    },
+    {
+      "scope": "markup.italic",
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "$wattle-seed"
+      }
+    },
+    {
+      "scope": "markup.strikethrough",
+      "settings": {
+        "fontStyle": "strikethrough"
+      }
+    },
+    {
+      "scope": "markup.inserted",
+      "settings": {
+        "foreground": "$sage"
+      }
+    },
+    {
+      "scope": "markup.deleted",
+      "settings": {
+        "foreground": "$ochre"
+      }
+    },
+    {
+      "scope": "markup.changed",
+      "settings": {
+        "foreground": "$sky"
+      }
+    },
+    {
+      "scope": "punctuation.definition.quote.begin.markdown",
+      "settings": {
+        "foreground": "$smoke"
+      }
+    },
+    {
+      "scope": "punctuation.definition.list.begin.markdown",
+      "settings": {
+        "foreground": "$sky"
+      }
+    },
+    {
+      "scope": "markup.inline.raw",
+      "settings": {
+        "foreground": "$desert-rose"
+      }
+    },
+    {
+      "name": "brackets of XML/HTML tags",
+      "scope": "punctuation.definition.tag",
+      "settings": {
+        "foreground": "$mulga"
+      }
+    },
+    {
+      "scope": [
+        "meta.preprocessor",
+        "entity.name.function.preprocessor"
+      ],
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "scope": "meta.preprocessor.string",
+      "settings": {
+        "foreground": "$spinifex"
+      }
+    },
+    {
+      "scope": "meta.preprocessor.numeric",
+      "settings": {
+        "foreground": "$dusk"
+      }
+    },
+    {
+      "scope": "meta.structure.dictionary.key.python",
+      "settings": {
+        "foreground": "$ghost-gum"
+      }
+    },
+    {
+      "scope": "meta.diff.header",
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "scope": "storage",
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "scope": "storage.type",
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "scope": [
+        "storage.modifier",
+        "keyword.operator.noexcept"
+      ],
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "scope": [
+        "string",
+        "meta.embedded.assembly"
+      ],
+      "settings": {
+        "foreground": "$spinifex"
+      }
+    },
+    {
+      "scope": "string.tag",
+      "settings": {
+        "foreground": "$spinifex"
+      }
+    },
+    {
+      "scope": "string.value",
+      "settings": {
+        "foreground": "$spinifex"
+      }
+    },
+    {
+      "scope": "string.regexp",
+      "settings": {
+        "foreground": "$sunset"
+      }
+    },
+    {
+      "name": "String interpolation",
+      "scope": [
+        "punctuation.definition.template-expression.begin",
+        "punctuation.definition.template-expression.end",
+        "punctuation.section.embedded"
+      ],
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "name": "Reset JavaScript string interpolation expression",
+      "scope": [
+        "meta.template.expression"
+      ],
+      "settings": {
+        "foreground": "$ghost-gum"
+      }
+    },
+    {
+      "scope": [
+        "support.type.vendored.property-name",
+        "support.type.property-name",
+        "source.css variable",
+        "source.coffee.embedded"
+      ],
+      "settings": {
+        "foreground": "$waterhole"
+      }
+    },
+    {
+      "scope": "keyword",
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "scope": "keyword.control",
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "scope": "keyword.operator",
+      "settings": {
+        "foreground": "$ghost-gum"
+      }
+    },
+    {
+      "scope": [
+        "keyword.operator.new",
+        "keyword.operator.expression",
+        "keyword.operator.cast",
+        "keyword.operator.sizeof",
+        "keyword.operator.alignof",
+        "keyword.operator.typeid",
+        "keyword.operator.alignas",
+        "keyword.operator.instanceof",
+        "keyword.operator.logical.python",
+        "keyword.operator.wordlike"
+      ],
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "scope": "keyword.other.unit",
+      "settings": {
+        "foreground": "$dusk"
+      }
+    },
+    {
+      "scope": [
+        "punctuation.section.embedded.begin.php",
+        "punctuation.section.embedded.end.php"
+      ],
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "scope": "support.function.git-rebase",
+      "settings": {
+        "foreground": "$waterhole"
+      }
+    },
+    {
+      "scope": "constant.sha.git-rebase",
+      "settings": {
+        "foreground": "$dusk"
+      }
+    },
+    {
+      "name": "coloring of the Java import and package identifiers",
+      "scope": [
+        "storage.modifier.import.java",
+        "variable.language.wildcard.java",
+        "storage.modifier.package.java"
+      ],
+      "settings": {
+        "foreground": "$ghost-gum"
+      }
+    },
+    {
+      "name": "this.self",
+      "scope": "variable.language",
+      "settings": {
+        "foreground": "$dusk"
+      }
+    },
+    {
+      "name": "Function declarations",
+      "scope": [
+        "entity.name.function",
+        "support.function",
+        "support.constant.handlebars",
+        "source.powershell variable.other.member",
+        "entity.name.operator.custom-literal"
+      ],
+      "settings": {
+        "foreground": "$sage"
+      }
+    },
+    {
+      "name": "Types declaration and references",
+      "scope": [
+        "support.class",
+        "support.type",
+        "entity.name.type",
+        "entity.name.namespace",
+        "entity.other.attribute",
+        "entity.name.scope-resolution",
+        "entity.name.class",
+        "storage.type.numeric.go",
+        "storage.type.byte.go",
+        "storage.type.boolean.go",
+        "storage.type.string.go",
+        "storage.type.uintptr.go",
+        "storage.type.error.go",
+        "storage.type.rune.go",
+        "storage.type.cs",
+        "storage.type.generic.cs",
+        "storage.type.modifier.cs",
+        "storage.type.variable.cs",
+        "storage.type.annotation.java",
+        "storage.type.generic.java",
+        "storage.type.java",
+        "storage.type.object.array.java",
+        "storage.type.primitive.array.java",
+        "storage.type.primitive.java",
+        "storage.type.token.java",
+        "storage.type.groovy",
+        "storage.type.annotation.groovy",
+        "storage.type.parameters.groovy",
+        "storage.type.generic.groovy",
+        "storage.type.object.array.groovy",
+        "storage.type.primitive.array.groovy",
+        "storage.type.primitive.groovy"
+      ],
+      "settings": {
+        "foreground": "$waterhole"
+      }
+    },
+    {
+      "name": "Types declaration and references, TS grammar specific",
+      "scope": [
+        "meta.type.cast.expr",
+        "meta.type.new.expr",
+        "support.constant.math",
+        "support.constant.dom",
+        "support.constant.json",
+        "entity.other.inherited-class",
+        "punctuation.separator.namespace.ruby"
+      ],
+      "settings": {
+        "foreground": "$waterhole"
+      }
+    },
+    {
+      "name": "Control flow / Special keywords",
+      "scope": [
+        "keyword.control",
+        "source.cpp keyword.operator.new",
+        "keyword.operator.delete",
+        "keyword.other.using",
+        "keyword.other.directive.using",
+        "keyword.other.operator",
+        "entity.name.operator"
+      ],
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "name": "Variable and parameter name",
+      "scope": [
+        "variable",
+        "meta.definition.variable.name",
+        "support.variable",
+        "entity.name.variable",
+        "constant.other.placeholder"
+      ],
+      "settings": {
+        "foreground": "$ghost-gum"
+      }
+    },
+    {
+      "name": "Constants and enums",
+      "scope": [
+        "variable.other.constant",
+        "variable.other.enummember"
+      ],
+      "settings": {
+        "foreground": "$dusk"
+      }
+    },
+    {
+      "name": "Object keys, TS grammar specific",
+      "scope": [
+        "meta.object-literal.key"
+      ],
+      "settings": {
+        "foreground": "$ghost-gum"
+      }
+    },
+    {
+      "name": "CSS property value",
+      "scope": [
+        "support.constant.property-value",
+        "support.constant.font-name",
+        "support.constant.media-type",
+        "support.constant.media",
+        "constant.other.color.rgb-value",
+        "constant.other.rgb-value",
+        "support.constant.color"
+      ],
+      "settings": {
+        "foreground": "$spinifex"
+      }
+    },
+    {
+      "name": "Regular expression groups",
+      "scope": [
+        "punctuation.definition.group.regexp",
+        "punctuation.definition.group.assertion.regexp",
+        "punctuation.definition.character-class.regexp",
+        "punctuation.character.set.begin.regexp",
+        "punctuation.character.set.end.regexp",
+        "keyword.operator.negation.regexp",
+        "support.other.parenthesis.regexp"
+      ],
+      "settings": {
+        "foreground": "$spinifex"
+      }
+    },
+    {
+      "scope": [
+        "constant.character.character-class.regexp",
+        "constant.other.character-class.set.regexp",
+        "constant.other.character-class.regexp",
+        "constant.character.set.regexp"
+      ],
+      "settings": {
+        "foreground": "$sunset"
+      }
+    },
+    {
+      "scope": [
+        "keyword.operator.or.regexp",
+        "keyword.control.anchor.regexp"
+      ],
+      "settings": {
+        "foreground": "$sage"
+      }
+    },
+    {
+      "scope": "keyword.operator.quantifier.regexp",
+      "settings": {
+        "foreground": "$wattle-seed"
+      }
+    },
+    {
+      "scope": [
+        "constant.character",
+        "constant.other.option"
+      ],
+      "settings": {
+        "foreground": "$dusk"
+      }
+    },
+    {
+      "scope": "constant.character.escape",
+      "settings": {
+        "foreground": "$wattle-seed"
+      }
+    },
+    {
+      "scope": "entity.name.label",
+      "settings": {
+        "foreground": "$saltpan"
+      }
+    },
+    {
+      "name": "Heading # markers: yellow, not bold",
+      "scope": "punctuation.definition.heading",
+      "settings": {
+        "foreground": "$spinifex"
+      }
+    },
+    {
+      "name": "Heading text: yellow and bold",
+      "scope": [
+        "entity.name.section",
+        "markup.heading.setext"
+      ],
+      "settings": {
+        "foreground": "$spinifex",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Heading attributes {#sec-...}: yellow, not bold",
+      "scope": "meta.heading-attributes",
+      "settings": {
+        "foreground": "$spinifex",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Inline code: desert rose",
+      "scope": "markup.inline.raw",
+      "settings": {
+        "foreground": "$desert-rose"
+      }
+    },
+    {
+      "name": "Operators: light blue",
+      "scope": [
+        "keyword.operator",
+        "keyword.operator.member",
+        "keyword.operator.new"
+      ],
+      "settings": {
+        "foreground": "$sky"
+      }
+    },
+    {
+      "name": "Keywords: violet",
+      "scope": [
+        "keyword",
+        "keyword.control",
+        "keyword.other"
+      ],
+      "settings": {
+        "foreground": "$mulla-mulla"
+      }
+    },
+    {
+      "name": "Link text in [text](url) and [text][ref]: sunset",
+      "scope": [
+        "string.other.link.title",
+        "string.other.link.description"
+      ],
+      "settings": {
+        "foreground": "$sunset"
+      }
+    },
+    {
+      "name": "Cross-references: ochre",
+      "scope": "keyword.control.import.reference",
+      "settings": {
+        "foreground": "$ochre"
+      }
+    },
+    {
+      "name": "Math ($...$, $$...$$, LaTeX math): eucalyptus grey",
+      "scope": [
+        "markup.math.inline.markdown",
+        "markup.math.block.markdown",
+        "markup.math.inline.quarto",
+        "markup.math.block.quarto",
+        "meta.embedded.math.markdown",
+        "meta.embedded.math.quarto",
+        "meta.math.block.tex",
+        "meta.math.block.latex",
+        "support.class.math.block.tex",
+        "support.class.math.block.environment.latex",
+        "meta.function.environment.math.latex",
+        "punctuation.definition.math.begin.markdown",
+        "punctuation.definition.math.end.markdown",
+        "keyword.control.import.math.begin.quarto",
+        "keyword.control.import.math.end.quarto",
+        "punctuation.section.embedded.begin.math.tex",
+        "punctuation.section.embedded.end.math.tex",
+        "constant.character.math.tex",
+        "constant.numeric.math.tex",
+        "constant.other.general.math.tex",
+        "constant.other.math.tex",
+        "entity.name.function.math.tex",
+        "storage.type.function.math.tex",
+        "support.function.sexpr.math.tex",
+        "meta.function.math.tex",
+        "line.separator.math.tex",
+        "punctuation.line.separator.math.tex",
+        "punctuation.definition.arguments.begin.math.tex",
+        "punctuation.definition.arguments.end.math.tex",
+        "punctuation.definition.constant.math.tex",
+        "punctuation.definition.function.math.tex",
+        "punctuation.math.begin.bracket.curly",
+        "punctuation.math.begin.bracket.round",
+        "punctuation.math.end.bracket.curly",
+        "punctuation.math.end.bracket.round",
+        "punctuation.math.bracket.pair.tex",
+        "punctuation.math.bracket.pair.big.tex",
+        "punctuation.math.operator.latex",
+        "punctuation.math.operator.tex"
+      ],
+      "settings": {
+        "foreground": "$eucalyptus"
+      }
+    },
+    {
+      "name": "YAML keys: ochre",
+      "scope": [
+        "entity.name.tag.yaml",
+        "source.yaml meta.mapping.key string"
+      ],
+      "settings": {
+        "foreground": "$ochre"
+      }
+    },
+    {
+      "name": "Link URLs: sage",
+      "scope": [
+        "markup.underline.link",
+        "markup.underline.link punctuation"
+      ],
+      "settings": {
+        "foreground": "$sage"
+      }
+    },
+    {
+      "name": "Markers for bold, italic and inline code (**, *, `): smoke grey",
+      "scope": [
+        "punctuation.definition.bold",
+        "punctuation.definition.italic",
+        "punctuation.definition.raw"
+      ],
+      "settings": {
+        "foreground": "$smoke"
+      }
+    },
+    {
+      "name": "Hidden content in ::: {.content-hidden} divs: comment grey",
+      "scope": "meta.content-hidden",
+      "settings": {
+        "foreground": "$smoke"
+      }
+    }
+  ],
+  "semanticTokenColors": {
+    "newOperator": "$mulla-mulla",
+    "stringLiteral": "$spinifex",
+    "customLiteral": "$sage",
+    "numberLiteral": "$dusk"
+  }
+}

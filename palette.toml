@@ -1,0 +1,33 @@
+# Outback palette: the one list of every Outback colour.
+#
+# The Positron theme (themes/outback.json) is built from this and src/outback.json,
+# where colours are written by name: "$ochre", or "$ochre/59" for ochre at alpha 0x59.
+# Run `make theme` after changing a colour, or `make install` to build and install.
+
+[colours]
+# Hues
+ochre = "#ee7a3c"        # red earth: errors, accents, YAML keys, cross-references, ANSI red
+spinifex = "#ffc852"     # strings, headings, badges, ANSI yellow
+wattle-seed = "#d9a93c"  # bold and italic text, escapes, find matches
+sunset = "#f48d6e"       # link text, warnings, regular expressions, ANSI blue
+desert-rose = "#eaa6c6"  # inline code
+mulla-mulla = "#c9a8f0"  # keywords, storage, tags
+dusk = "#a9a9e9"         # numbers and constants, ANSI magenta
+sky = "#94c8f0"          # operators, outermost brackets, UI links and info
+waterhole = "#86daca"    # types, classes, attribute names, ANSI cyan
+new-growth = "#aeda76"   # added lines and git decorations, ANSI green
+sage = "#8cc496"         # function names, link URLs, inserted text
+eucalyptus = "#abc4b8"   # maths
+
+# Greys, darkest to lightest
+night = "#1a1513"        # sidebar, panels, tabs, title and status bars, activity bar, ANSI black
+ironbark = "#221c1a"     # debug toolbar
+charcoal = "#2d2523"     # editor background, text on badges
+embers = "#352c2a"       # borders, inputs
+burnt = "#413836"        # terminal background, input borders, indent guides
+ash = "#5c5351"          # inactive icons, blockquote borders
+smoke = "#736968"        # comments, line numbers, hidden content, ANSI bright black
+mulga = "#958a89"        # secondary text
+saltpan = "#c4b7b6"      # activity bar text, selections
+ghost-gum = "#fff2f0"    # foreground, ANSI white
+black = "#000000"        # shadows; "$black/00" is transparent

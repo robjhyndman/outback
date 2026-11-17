@@ -1,0 +1,5 @@
+build/
+*.vsix
+
+# Claude plan/lessons scratch files
+tasks/

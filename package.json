@@ -1,0 +1,43 @@
+{
+  "name": "outback",
+  "displayName": "Outback",
+  "description": "A warm dark theme inspired by the colours of Central Australia, tuned for Quarto and R.",
+  "version": "0.0.1",
+  "publisher": "hyndman",
+  "license": "MIT",
+  "author": {
+    "name": "Rob J Hyndman"
+  },
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Outback",
+        "uiTheme": "vs-dark",
+        "path": "./themes/outback.json"
+      }
+    ],
+    "grammars": [
+      {
+        "scopeName": "outback.heading-attributes.injection",
+        "path": "./syntaxes/heading-attributes.injection.json",
+        "injectTo": [
+          "text.html.quarto",
+          "text.html.markdown"
+        ]
+      },
+      {
+        "scopeName": "outback.content-hidden.injection",
+        "path": "./syntaxes/content-hidden.injection.json",
+        "injectTo": [
+          "text.html.quarto"
+        ]
+      }
+    ]
+  }
+}

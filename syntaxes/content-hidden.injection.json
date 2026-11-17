@@ -1,0 +1,18 @@
+{
+  "scopeName": "outback.content-hidden.injection",
+  "injectionSelector": "L:text.html.quarto -meta.content-hidden -markup.fenced_code -markup.raw -meta.embedded",
+  "patterns": [{ "include": "#hidden-div" }],
+  "repository": {
+    "hidden-div": {
+      "name": "meta.content-hidden",
+      "begin": "(^|\\G)(\\s*)(:{3,})\\s*\\{[^}]*\\.content-hidden\\b[^}]*\\}\\s*$",
+      "end": "(^|\\G)(\\2)(\\3)\\s*$",
+      "patterns": [{ "include": "#nested-div" }]
+    },
+    "nested-div": {
+      "begin": "(^|\\G)(\\s*)(:{3,})\\s*\\S.*$",
+      "end": "(^|\\G)(\\2)(\\3)\\s*$",
+      "patterns": [{ "include": "#nested-div" }]
+    }
+  }
+}
