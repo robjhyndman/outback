@@ -966,6 +966,16 @@
       }
     },
     {
+      "name": "Table pipes (|) and header rules (---): mulga",
+      "scope": [
+        "punctuation.definition.table.markdown",
+        "punctuation.separator.table.markdown"
+      ],
+      "settings": {
+        "foreground": "$mulga"
+      }
+    },
+    {
       "name": "Hidden content in ::: {.content-hidden} divs: comment grey",
       "scope": "meta.content-hidden",
       "settings": {
