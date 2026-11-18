@@ -9,23 +9,23 @@ Outback is available for [Positron and VS Code](#positron-and-vs-code), [RStudio
 
 ## Colours
 
-  | Element                                            | Colour                        |
-  | ---                                                | ---                           |
-  | Headings                                           | spinifex `#ffc852`, bold      |
-  | Strings                                            | spinifex `#ffc852`            |
-  | Inline code                                        | desert rose `#eaa6c6`         |
-  | Link text                                          | sunset `#f48d6e`              |
-  | Link URLs, function names and inserted text        | sage `#8cc496`                |
-  | YAML keys and cross-references such as `@fig-beer` | ochre `#ee7a3c`               |
-  | Maths                                              | eucalyptus `#abc4b8`          |
-  | Comments and `::: {.content-hidden}` divs          | smoke `#736968`               |
-  | Operators such as `\|>`, `<-` and `+`              | sky `#94c8f0`                 |
-  | Keywords such as `if`, `for` and `function`        | mulla-mulla `#c9a8f0`         |
-  | Bold and italic text                               | wattle seed `#d9a93c`         |
-  | Numbers and constants such as `TRUE` and `NULL`    | dusk `#a9a9e9`                |
-  | Types, classes and attribute names                 | waterhole `#86daca`           |
-  | Variables and other text                           | ghost gum `#fff2f0`           |
-  | Brackets, by nesting level                         | sky, wattle seed, desert rose |
+| Element                                            | Colour                        |
+| ---                                                | ---                           |
+| Headings                                           | spinifex `#ffc852`, bold      |
+| Strings                                            | spinifex `#ffc852`            |
+| Inline code                                        | desert rose `#eaa6c6`         |
+| Link text                                          | sunset `#f48d6e`              |
+| Link URLs, function names and inserted text        | sage `#8cc496`                |
+| YAML keys and cross-references such as `@fig-beer` | ochre `#ee7a3c`               |
+| Maths                                              | eucalyptus `#abc4b8`          |
+| Comments and `::: {.content-hidden}` divs          | smoke `#736968`               |
+| Operators such as `\|>`, `<-` and `+`              | sky `#94c8f0`                 |
+| Keywords such as `if`, `for` and `function`        | mulla-mulla `#c9a8f0`         |
+| Bold and italic text                               | wattle seed `#d9a93c`         |
+| Numbers and constants such as `TRUE` and `NULL`    | dusk `#a9a9e9`                |
+| Types, classes and attribute names                 | waterhole `#86daca`           |
+| Variables and other text                           | ghost gum `#fff2f0`           |
+| Brackets, by nesting level                         | sky, wattle seed, desert rose |
 
 In the interface, ochre marks buttons, focus, the active tab and errors; badges are spinifex; and added lines in diffs and git decorations are new growth `#aeda76`.
 
