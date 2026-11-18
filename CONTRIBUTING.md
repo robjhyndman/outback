@@ -77,3 +77,32 @@ After `make theme`, switch Sublime Merge to another theme and back to load the c
 RStudio's editor (Ace) has its own token names, so `RSTUDIO_TOKENS` in `extras.py` maps CSS selectors for them to the TextMate scope whose Positron colour each should copy.
 Two cases need `:has()`: link text is a `keyword` token, as R's `if` is, so it is picked out by the URL that follows it; and unquoted YAML values are plain text, so they take their colour from a line that has a YAML key.
 The token names come from RStudio's mode files (`mode/*_highlight_rules`), bundled in `www/rstudio/*.cache.js` in an RStudio install.
+
+### Add an app
+
+1. In `extras.py`, write a function that returns the new theme file as text.
+   Take colours from the Positron theme with `t.color("<colour key>")` and `t.resolve("<scope>", "foreground")`, or from the palette with `pick(palette, "<name>", "<where>")`.
+   Start the file with the `NOTE` lines as comments.
+2. Add an output path constant next to the others, and add `(path, function(...))` to `outputs` in `main()`.
+3. Add a line for the app to the docstring at the top of `extras.py`.
+4. Add `<app>/<file>:<where the app looks for it>` to `LINKS` in the `Makefile`.
+5. Run `make theme`, then `make install-extras`, and check the result in the app.
+6. In `README.md`, add the app to the list at the top and give it an install section.
+   Add a paragraph on how its theme is mapped to the "Other apps" section above.
+
+## Make a release
+
+The other apps' themes are downloaded from `main`, so pushing updates them.
+A release publishes the `.vsix` for Positron and VS Code.
+
+1. Bump `version` in `package.json`.
+2. Run `make check`, then `make package`, which builds `build/outback-<version>.vsix`.
+3. Commit and push.
+4. Publish the release, with the `.vsix` attached:
+
+   ```bash
+   v=$(python3 -c "import json; print(json.load(open('package.json'))['version'])")
+   gh release create "v$v" "build/outback-$v.vsix" --target main --title "Outback $v" --notes "..."
+   ```
+
+The README's install link goes to the latest release, so it picks up the new one.
