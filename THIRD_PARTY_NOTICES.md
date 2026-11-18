@@ -1,6 +1,6 @@
 # Third-party notices
 
-Outback's theme structure (the colour keys it sets and the base token rules in `src/outback.json`, and so in the generated `themes/outback.json`) is derived from four themes in the `theme-defaults` extension that ships with Positron and VS Code:
+Outback's theme structure (the colour keys it sets and the base token rules in `src/outback.json`, and so in the generated `themes/outback.json` and the themes in `extras/` that are generated from it) is derived from four themes in the `theme-defaults` extension that ships with Positron and VS Code:
 
 - **Default Positron Dark** (`positron_dark.json`), by Posit Software, PBC, under the Elastic License 2.0.
 - **Dark Modern**, **Dark+** and **Dark VS** (`dark_modern.json`, `dark_plus.json`, `dark_vs.json`), by Microsoft Corporation, under the MIT licence.
@@ -14,6 +14,7 @@ Source: `extensions/theme-defaults/themes/positron_dark.json` in <https://github
 
 **Modification notice:** `src/outback.json` and `themes/outback.json` are modified versions of Default Positron Dark, as merged with the Dark Modern, Dark+ and Dark VS themes it includes.
 Rob J Hyndman replaced every colour and added colour keys and token rules.
+The files in `extras/` are generated from `themes/outback.json`; the bat theme copies its token rules as they are.
 
 Positron's licence, reproduced in full:
 

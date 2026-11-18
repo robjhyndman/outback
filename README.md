@@ -2,6 +2,7 @@
 
 A warm dark theme for Positron and VS Code, with colours inspired by Central Australia: red earth, ochre, spinifex gold and a clear desert sky.
 It is built on Positron's default dark theme, with its own palette and extra rules for reading and writing Quarto documents and R code.
+Matching themes for Zed, Konsole, KDE Plasma and bat are generated from it (see [Other apps](#other-apps)).
 
 ## Colours
 
@@ -50,12 +51,42 @@ make install EDITOR_CLI=code
 
 `make package` builds the `.vsix` in `build/` without installing it, and `make clean` removes `build/`.
 
+## Other apps
+
+`extras/` holds Outback for other apps, generated from the Positron theme by `extras.py`:
+
+| App       | File                                 | Where it goes                                  |
+| ---       | ---                                  | ---                                            |
+| Zed       | `extras/zed/outback.json`            | `~/.config/zed/themes/outback.json`            |
+| Konsole   | `extras/konsole/Outback.colorscheme` | `~/.local/share/konsole/Outback.colorscheme`   |
+| KDE Plasma (Dolphin and other Qt apps) | `extras/kde/Outback.colors` | `~/.local/share/color-schemes/Outback.colors` |
+| bat       | `extras/bat/Outback.tmTheme`         | `~/.config/bat/themes/Outback.tmTheme`         |
+
+To symlink them all into place (and rebuild bat's theme cache):
+
+```bash
+make install-extras
+```
+
+Because they are symlinks, a `git pull` updates them.
+Then pick Outback in each app:
+
+- **Zed:** set `"theme": "Outback"` in `settings.json`, or run **theme selector: toggle**.
+- **Konsole:** Settings → Edit Current Profile → Appearance → Outback.
+- **KDE Plasma:** `plasma-apply-colorscheme Outback`, or System Settings → Colors.
+  Leave the accent colour set to "from colour scheme", as a custom accent overrides the scheme's selection colours.
+- **bat:** pass `--theme=Outback`, or put that line in `~/.config/bat/config`.
+
+Zed maps Positron's colour keys and TextMate scopes onto its own theme keys, Konsole uses the terminal colours, KDE uses the window and list colours, and bat copies the token rules as they are.
+The mappings are in `extras.py`.
+I maintain these because I use them; other apps aren't planned.
+
 ## Palette
 
 Every Outback colour is named once, in `palette.toml`: hues such as ochre `#ee7a3c`, spinifex `#ffc852` and eucalyptus `#abc4b8`, and greys from night `#1a1513` to ghost gum `#fff2f0`.
 `src/outback.json` is the theme with colours written by name: `"$ochre"`, or `"$ochre/59"` for ochre with alpha `59` (hex).
-`make theme` (run by `make package` and `make install`) builds `themes/outback.json` from the two, so don't edit that file by hand.
-`make check` fails if it is out of date.
+`make theme` (run by `make package` and `make install`) builds `themes/outback.json` from the two, and then `extras/` from that, so don't edit those files by hand.
+`make check` fails if any of them is out of date.
 The build also fails on a name that isn't in the palette, a palette colour the theme never uses, or a raw hex colour in `src/outback.json`.
 
 ## Change a colour
