@@ -21,7 +21,7 @@
         "element.active": "#ee7a3ce6",
         "element.selected": "#ee7a3c33",
         "element.disabled": "#ee7a3c",
-        "drop_target.background": "#c4b7b6",
+        "drop_target.background": "#c4b7b633",
         "ghost_element.background": "#00000000",
         "ghost_element.hover": "#352c2a",
         "ghost_element.active": "#fff2f019",

@@ -88,6 +88,7 @@ curl -fsSL -o ~/.local/share/konsole/Outback.colorscheme \
 ```
 
 Then choose Settings → Edit Current Profile → Appearance → **Outback**.
+For grey selections, leave **Always invert the colors of selected text** unchecked on the Miscellaneous tab of the same page.
 
 ### KDE Plasma
 
