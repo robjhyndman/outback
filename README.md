@@ -1,121 +1,134 @@
 # Outback
 
-A warm dark theme for Positron and VS Code, with colours inspired by Central Australia: red earth, ochre, spinifex gold and a clear desert sky.
-It is built on Positron's default dark theme, with its own palette and extra rules for reading and writing Quarto documents and R code.
-Matching themes for Zed, Konsole, KDE Plasma and bat are generated from it (see [Other apps](#other-apps)).
+A warm dark theme with colours inspired by Central Australia: red earth, ochre, spinifex gold and a clear desert sky.
+It is tuned for reading and writing Quarto documents and R code, and works well with any language.
+
+Outback is available for [Positron and VS Code](#positron-and-vs-code), [RStudio](#rstudio), [Zed](#zed), [Konsole](#konsole), [KDE Plasma](#kde-plasma), [batcat](#batcat) and [eza](#eza).
 
 ## Colours
 
-| Element                                              | Colour                         |
-| ---                                                  | ---                            |
-| Heading text                                         | spinifex `#ffc852`, bold       |
-| Heading `#` markers and labels such as `{#sec-intro}` | spinifex `#ffc852`, not bold   |
-| Strings                                              | spinifex `#ffc852`             |
-| Inline code (its backticks are smoke)               | desert rose `#eaa6c6`          |
-| Link text in `[text](url)`                           | sunset `#f48d6e`               |
-| Link URLs, function names and inserted text          | sage `#8cc496`                 |
-| YAML keys and cross-references such as `@fig-beer`   | ochre `#ee7a3c`                |
-| Maths, including `$` delimiters                      | eucalyptus `#abc4b8`           |
-| `::: {.content-hidden}` divs and comments            | smoke `#736968`                |
-| Operators such as `\|>`, `<-` and `+`                | sky `#94c8f0`                  |
-| Keywords such as `if`, `for`, `function`          | mulla-mulla `#c9a8f0`          |
-| Bold and italic text (their `**` and `*` markers are smoke) | wattle seed `#d9a93c`       |
-| Numbers and constants such as `TRUE` and `NULL`      | dusk `#a9a9e9`                 |
-| Types, classes and attribute names                   | waterhole `#86daca`            |
-| Variables and other text                             | ghost gum `#fff2f0`            |
-| Brackets, by nesting level                           | sky, wattle seed, desert rose  |
+  | Element                                            | Colour                        |
+  | ---                                                | ---                           |
+  | Headings                                           | spinifex `#ffc852`, bold      |
+  | Strings                                            | spinifex `#ffc852`            |
+  | Inline code                                        | desert rose `#eaa6c6`         |
+  | Link text                                          | sunset `#f48d6e`              |
+  | Link URLs, function names and inserted text        | sage `#8cc496`                |
+  | YAML keys and cross-references such as `@fig-beer` | ochre `#ee7a3c`               |
+  | Maths                                              | eucalyptus `#abc4b8`          |
+  | Comments and `::: {.content-hidden}` divs          | smoke `#736968`               |
+  | Operators such as `\|>`, `<-` and `+`              | sky `#94c8f0`                 |
+  | Keywords such as `if`, `for` and `function`        | mulla-mulla `#c9a8f0`         |
+  | Bold and italic text                               | wattle seed `#d9a93c`         |
+  | Numbers and constants such as `TRUE` and `NULL`    | dusk `#a9a9e9`                |
+  | Types, classes and attribute names                 | waterhole `#86daca`           |
+  | Variables and other text                           | ghost gum `#fff2f0`           |
+  | Brackets, by nesting level                         | sky, wattle seed, desert rose |
 
-In the UI, ochre marks buttons, focus, the active tab and errors; badges are spinifex; added lines in diffs and git decorations are new growth `#aeda76`.
+In the interface, ochre marks buttons, focus, the active tab and errors; badges are spinifex; and added lines in diffs and git decorations are new growth `#aeda76`.
 
-The operator and keyword colours apply in every language, not only in Quarto code chunks.
-Other `keyword.control` scopes, such as shortcode markers, are also mulla-mulla.
+## Quarto and Markdown
+
+- Heading labels such as `{#sec-intro}` are shown in the heading colour but not bold, so they stand apart from the heading text.
+- Everything inside a `::: {.content-hidden}` div is greyed out, so hidden content is easy to spot.
+- Markup characters (the backticks around inline code and the `**` and `*` around bold and italic text) are dimmed, so the text itself stands out.
+
+Heading labels and hidden content are styled by grammar additions in the Positron and VS Code extension.
 
 ## Install
 
-You need `make`, `python3`, `zip` and the `positron` command.
-Node isn't needed, because the Makefile builds the `.vsix` directly.
+Each app has its own theme file.
+To update one, download it again.
+
+### Positron and VS Code
+
+1. Download the `.vsix` file from the [latest release](https://github.com/robjhyndman/outback/releases/latest).
+2. In the editor, open the Extensions view, click the **…** menu at the top and choose **Install from VSIX…**, then pick the file you downloaded.
+3. Run **Preferences: Color Theme** from the Command Palette (Ctrl+Shift+P, or Cmd+Shift+P on a Mac) and choose **Outback**.
+
+Or install it from a terminal:
 
 ```bash
-make install
+positron --install-extension outback-0.0.1.vsix   # or: code --install-extension ...
 ```
 
-Then run **Developer: Reload Window**, followed by **Preferences: Color Theme**, and choose **Outback**.
+To uninstall, find **Outback** in the Extensions view and choose **Uninstall**.
 
-Positron runs the installed copy of the extension, not this checkout, so run `make install` and reload the window after every pull or edit.
+### RStudio
 
-To install into another VS Code-based editor:
+Run this in the R console:
+
+```r
+f <- file.path(tempdir(), "Outback.rstheme")
+download.file("https://raw.githubusercontent.com/robjhyndman/outback/main/extras/rstudio/Outback.rstheme", f)
+rstudioapi::addTheme(f, apply = TRUE, force = TRUE)
+```
+
+Or choose **Outback** later in Tools → Global Options → Appearance → Editor theme.
+For the closest match to Positron, also turn on **Highlight R function calls** and **Use rainbow parentheses** in Tools → Global Options → Code → Display.
+
+### Zed
 
 ```bash
-make install EDITOR_CLI=code
+mkdir -p ~/.config/zed/themes
+curl -fsSL -o ~/.config/zed/themes/outback.json \
+  https://raw.githubusercontent.com/robjhyndman/outback/main/extras/zed/outback.json
 ```
 
-`make package` builds the `.vsix` in `build/` without installing it, and `make clean` removes `build/`.
+Then run **theme selector: toggle** and choose **Outback**, or set `"theme": "Outback"` in Zed's `settings.json`.
 
-## Other apps
-
-`extras/` holds Outback for other apps, generated from the Positron theme by `extras.py`:
-
-| App       | File                                 | Where it goes                                  |
-| ---       | ---                                  | ---                                            |
-| Zed       | `extras/zed/outback.json`            | `~/.config/zed/themes/outback.json`            |
-| Konsole   | `extras/konsole/Outback.colorscheme` | `~/.local/share/konsole/Outback.colorscheme`   |
-| KDE Plasma (Dolphin and other Qt apps) | `extras/kde/Outback.colors` | `~/.local/share/color-schemes/Outback.colors` |
-| bat       | `extras/bat/Outback.tmTheme`         | `~/.config/bat/themes/Outback.tmTheme`         |
-
-To symlink them all into place (and rebuild bat's theme cache):
+### Konsole
 
 ```bash
-make install-extras
+mkdir -p ~/.local/share/konsole
+curl -fsSL -o ~/.local/share/konsole/Outback.colorscheme \
+  https://raw.githubusercontent.com/robjhyndman/outback/main/extras/konsole/Outback.colorscheme
 ```
 
-Because they are symlinks, a `git pull` updates them.
-Then pick Outback in each app:
+Then choose Settings → Edit Current Profile → Appearance → **Outback**.
 
-- **Zed:** set `"theme": "Outback"` in `settings.json`, or run **theme selector: toggle**.
-- **Konsole:** Settings → Edit Current Profile → Appearance → Outback.
-- **KDE Plasma:** `plasma-apply-colorscheme Outback`, or System Settings → Colors.
-  Leave the accent colour set to "from colour scheme", as a custom accent overrides the scheme's selection colours.
-- **bat:** pass `--theme=Outback`, or put that line in `~/.config/bat/config`.
+### KDE Plasma
 
-Zed maps Positron's colour keys and TextMate scopes onto its own theme keys, Konsole uses the terminal colours, KDE uses the window and list colours, and bat copies the token rules as they are.
-The mappings are in `extras.py`.
-I maintain these because I use them; other apps aren't planned.
+This colours Dolphin and other Qt apps.
 
-## Palette
+```bash
+mkdir -p ~/.local/share/color-schemes
+curl -fsSL -o ~/.local/share/color-schemes/Outback.colors \
+  https://raw.githubusercontent.com/robjhyndman/outback/main/extras/kde/Outback.colors
+plasma-apply-colorscheme Outback
+```
 
-Every Outback colour is named once, in `palette.toml`: hues such as ochre `#ee7a3c`, spinifex `#ffc852` and eucalyptus `#abc4b8`, and greys from night `#1a1513` to ghost gum `#fff2f0`.
-`src/outback.json` is the theme with colours written by name: `"$ochre"`, or `"$ochre/59"` for ochre with alpha `59` (hex).
-`make theme` (run by `make package` and `make install`) builds `themes/outback.json` from the two, and then `extras/` from that, so don't edit those files by hand.
-`make check` fails if any of them is out of date.
-The build also fails on a name that isn't in the palette, a palette colour the theme never uses, or a raw hex colour in `src/outback.json`.
+Or choose it in System Settings → Colors.
+Leave the accent colour set to "from colour scheme", because a custom accent overrides the scheme's selection colours.
 
-## Change a colour
+### batcat
 
-- **Everywhere it's used:** change its hex value in `palette.toml`.
-- **Syntax colours:** edit the rules at the end of `tokenColors` in `src/outback.json`.
-  To find the scope for some text, put the cursor on it and run **Developer: Inspect Editor Tokens and Scopes**.
-- **Editor colours:** edit `colors` in the same file.
-  For example, `editorBracketHighlight.foreground1` sets the outermost bracket colour.
-  Keys the theme doesn't set fall back to Positron's defaults.
-- **A new colour:** add it to `palette.toml` first, then refer to it by name.
+```bash
+mkdir -p "$(batcat --config-dir)/themes"
+curl -fsSL -o "$(batcat --config-dir)/themes/Outback.tmTheme" \
+  https://raw.githubusercontent.com/robjhyndman/outback/main/extras/bat/Outback.tmTheme
+batcat cache --build
+```
 
-Theme rules can only set the foreground colour and font style, so they can't give inline code a background.
+On systems other than Debian and Ubuntu, use `bat` instead of `batcat`.
+Then pass `--theme=Outback`, or add that line to `$(batcat --config-dir)/config`.
 
-## Heading labels
+### eza
 
-The Quarto grammar treats `{#sec-intro}` as part of the heading text, so a theme rule alone can't style it separately.
-`syntaxes/heading-attributes.injection.json` gives a `{...}` at the end of a heading in Quarto and Markdown files its own scope, `meta.heading-attributes`, and the theme turns off bold for that scope.
-Any literal `{...}` at the very end of a heading is treated the same way.
+```bash
+mkdir -p ~/.config/eza
+curl -fsSL -o ~/.config/eza/theme.yml \
+  https://raw.githubusercontent.com/robjhyndman/outback/main/extras/eza/theme.yml
+```
 
-## Hidden content
+eza picks up the theme automatically; set `EZA_CONFIG_DIR` if you keep its config elsewhere.
 
-The Quarto grammar gives every `:::` div the same scope, whatever its class, so a theme rule alone can't grey out hidden content.
-`syntaxes/content-hidden.injection.json` gives a div whose attributes include `.content-hidden`, from its opening fence to the matching closing fence, the single scope `meta.content-hidden`, and the theme colours that scope grey.
-The contents aren't parsed further, so headings, maths, links and code chunks inside are all grey.
-Nested divs inside are handled, including ones that use the same number of colons.
+## Contributing
+
+To change colours or work on the theme itself, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Licence
 
 Outback's own work is released under the [MIT licence](LICENSE).
-Parts of `src/outback.json` (and so of `themes/outback.json`) derive from Positron's Default Positron Dark theme, under the Elastic License 2.0, and from VS Code's Dark Modern, Dark+ and Dark VS themes, under the MIT licence.
+Parts of the Positron and VS Code theme derive from Positron's Default Positron Dark theme, under the Elastic License 2.0, and from VS Code's Dark Modern, Dark+ and Dark VS themes, under the MIT licence.
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
