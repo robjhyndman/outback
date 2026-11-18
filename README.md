@@ -5,6 +5,8 @@ It is tuned for reading and writing Quarto documents and R code, and works well 
 
 Outback is available for [Positron and VS Code](#positron-and-vs-code), [RStudio](#rstudio), [Zed](#zed), [Konsole](#konsole), [KDE Plasma](#kde-plasma), [batcat](#batcat), [eza](#eza) and [Zen](#zen).
 
+![A Quarto document in Positron with the Outback theme, beside a terminal listing files with eza](https://raw.githubusercontent.com/robjhyndman/outback/main/images/screenshot.png)
+
 ## Colours
 
   | Element                                            | Colour                        |
