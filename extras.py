@@ -5,7 +5,9 @@ The Zed theme, Konsole colour scheme, KDE colour scheme and bat (tmTheme) theme 
 Positron colour keys and TextMate scopes, so they are generated from the Positron theme.
 The RStudio theme maps RStudio's own (Ace) token classes onto TextMate scopes.
 The eza theme picks colours by palette name. The Zen userChrome.css sets the
-browser's CSS colour variables from Positron colour keys. All are written to extras/.
+browser's CSS colour variables from Positron colour keys. The Sublime Merge theme
+sets Merge Dark's colour variables by palette name, and its colour scheme copies the
+token rules. All are written to extras/.
 
 Usage:
     python3 -I extras.py           # rewrite extras/
@@ -800,6 +802,160 @@ def zen_prefs():
         'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);']) + "\n"
 
 
+# Sublime Merge colour scheme: global -> VS Code colour key.
+SM_GLOBAL = {
+    "background": "editor.background",
+    "foreground": "editor.foreground",
+    "caret": "editorCursor.foreground",
+    "line_highlight": "editor.lineHighlightBackground",
+    "selection": "editor.selectionBackground",
+    "inactive_selection": "editor.selectionHighlightBackground",
+    "gutter_foreground": "editorLineNumber.foreground",
+    "gutter_foreground_highlight": "editorLineNumber.activeForeground",
+    "invisibles": "editorWhitespace.foreground",
+    "find_highlight": "editor.findMatchBorder",
+    "accent": "focusBorder",
+}
+
+# The text-entry widgets (commit summary, search, filters) sit on the input colours.
+SM_WIDGET_GLOBAL = {**SM_GLOBAL, "background": "input.background",
+                    "line_highlight": "input.background", "selection_border": "input.border"}
+
+# Diff backgrounds: (palette name, alpha). The faint line tint marks a line with
+# some changes; the strong .char tint marks the changed words, and also whole added
+# or deleted lines. Ochre is darker than new-growth, so it needs more alpha.
+SM_DIFF = {
+    "diff.inserted": ("new-growth", "14"),
+    "diff.inserted.char": ("new-growth", "59"),
+    "diff.deleted": ("ochre", "14"),
+    "diff.deleted.char": ("ochre", "73"),
+}
+
+SM_FONT_STYLES = {"bold", "italic", "underline"}
+
+# Sublime Merge theme variables -> palette name, or (palette name, alpha). The theme
+# extends Merge Dark, so these replace its hues and greys; most of its other variables
+# are derived from them. The rest are colours Merge Dark writes as literals.
+SM_VARS = {
+    # Hues
+    "red": "ochre",
+    "orange": "sunset",
+    "yellow": "spinifex",
+    "green": "new-growth",
+    "teal": "waterhole",
+    "blue": "sky",
+    "purple": "mulla-mulla",
+    "magenta": "desert-rose",
+    # Greys: header, side bar and dialogs are night, like Positron's panels;
+    # the commit list and diff are charcoal, like its editor.
+    "text-heading": "ghost-gum",
+    "text": "saltpan",
+    "medium_gray-light": "saltpan",
+    "medium_gray": "mulga",
+    "medium_gray-dark": "ash",
+    "dark_gray-lightest": "charcoal",
+    "dark_gray-light": "night",
+    "dark_gray-medium": "night",
+    "dark_gray": "night",
+    # Commit graph lanes, and the branch labels that share their colours
+    "commit_edge_0": "ochre",
+    "commit_edge_1": "sky",
+    "commit_edge_2": "mulla-mulla",
+    "commit_edge_3": "desert-rose",
+    "commit_edge_4": "spinifex",
+    "commit_edge_5": "waterhole",
+    "commit_annotation_fg_inverted": "night",
+    # Despite its name, this is also the selected commit's background.
+    "commit_row_bg-hover": ("ochre", "33"),
+    # Literals in Merge Dark
+    "icon_button_fg": "ghost-gum",
+    "disclosure_fg": "ghost-gum",
+    "hunk_button_fg": "ghost-gum",
+    "preview_fg": "ghost-gum",
+    "welcome_bg": "night",
+    "repository_tab_bar_bg": "night",
+    "toggle_button_bg": "embers",
+    "toggle_button_bg-details": "burnt",
+    "tool_tip_bg": "embers",
+    "tool_tip_fg": "ghost-gum",
+    "tool_tip_border": "ash",
+    "file_badge_unmerged_fg": "night",
+    "tag_ann_bg": ("spinifex", "cc"),
+    # Primary buttons (Commit, Stage) are ochre with dark text, as in Positron.
+    "highlighted_button_light_bg": "ochre",
+    "highlighted_button_dark_bg": "ochre",
+    "highlighted_button_light_fg": "night",
+    "highlighted_button_dark_fg": "night",
+    "radio_selected": "ochre",
+    "radio_border-selected": "ochre",
+    "checkbox_selected": "ochre",
+    "checkbox_border-selected": "ochre",
+    "loading_ball_2": "ochre",
+    # Literals in the light Merge theme that Merge Dark keeps
+    "radio_border-unselected": "mulga",
+    "checkbox_border-unselected": "mulga",
+    "checkbox-disabled": "ash",
+    "hint_fg": "night",
+    "info-progress_bar_bg": "burnt",
+    "info-progress_bar_fg": "mulga",
+}
+
+SM_DIR = ROOT / "extras/sublime-merge"
+# Merge reads "<context> - <theme name>.sublime-settings" for each kind of text view.
+SM_CONTEXTS = ["Diff", "Commit Message", "File Mode", "Git Output"]
+
+
+def sublime_json(d):
+    return "\n".join([f"// {n}" for n in NOTE] + [json.dumps(d, indent="\t")]) + "\n"
+
+
+def sublime_merge_scheme(t, palette, name, glob):
+    """Sublime colour scheme: VS Code tokenColors as rules, plus the diff backgrounds."""
+    rules = []
+    for rule in t.token_colors:
+        out = {}
+        if "name" in rule["settings"]:
+            out["name"] = rule["settings"]["name"]
+        scope = rule["scope"]
+        out["scope"] = scope if isinstance(scope, str) else ", ".join(scope)
+        for k in ("foreground", "background"):
+            if k in rule["settings"]:
+                out[k] = rule["settings"][k].lower()
+        if "fontStyle" in rule["settings"]:
+            out["font_style"] = " ".join(w for w in rule["settings"]["fontStyle"].split()
+                                         if w in SM_FONT_STYLES)
+        rules.append(out)
+    for scope, (colour, alpha) in SM_DIFF.items():
+        rules.append({"scope": scope, "background": pick(palette, colour, scope) + alpha})
+    return sublime_json({"name": name, "author": "Rob J Hyndman",
+                         "globals": {k: t.color(v) for k, v in glob.items()},
+                         "rules": rules})
+
+
+def sublime_merge_theme(palette):
+    def colour(spec, var):
+        name, alpha = spec if isinstance(spec, tuple) else (spec, "")
+        return pick(palette, name, var) + alpha
+    return sublime_json({"extends": "Merge Dark.sublime-theme",
+                         "variables": {k: colour(v, k) for k, v in SM_VARS.items()}})
+
+
+def sublime_merge(t, palette):
+    """Files for ~/.config/sublime-merge/Packages/User, keyed by output path."""
+    out = {
+        SM_DIR / "Outback.sublime-theme": sublime_merge_theme(palette),
+        SM_DIR / "Outback.sublime-color-scheme": sublime_merge_scheme(t, palette, "Outback", SM_GLOBAL),
+        SM_DIR / "Widget - Outback.hidden-color-scheme":
+            sublime_merge_scheme(t, palette, "Outback Widgets", SM_WIDGET_GLOBAL),
+        SM_DIR / "Widget - Outback.sublime-settings":
+            sublime_json({"color_scheme": "Widget - Outback.hidden-color-scheme", "draw_shadows": False}),
+    }
+    for c in SM_CONTEXTS:
+        out[SM_DIR / f"{c} - Outback.sublime-settings"] = sublime_json(
+            {"color_scheme": "Outback.sublime-color-scheme"})
+    return out
+
+
 def main():
     check = "--check" in sys.argv[1:]
     t = Theme(SRC)
@@ -807,7 +963,8 @@ def main():
     stale = []
     outputs = ((ZED_OUT, zed(t)), (KONSOLE_OUT, konsole(t)), (KDE_OUT, kde(t, pal)), (BAT_OUT, bat(t)),
                (EZA_OUT, eza(pal)), (RSTUDIO_OUT, rstudio(t, pal)),
-               (ZEN_OUT, zen(t)), (ZEN_PREFS_OUT, zen_prefs()))
+               (ZEN_OUT, zen(t)), (ZEN_PREFS_OUT, zen_prefs()),
+               *sublime_merge(t, pal).items())
     for path, text in outputs:
         current = path.read_text() if path.exists() else None
         if current == text:

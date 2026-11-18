@@ -42,6 +42,10 @@ install-extras:
 	  src=$(CURDIR)/extras/$${l%%:*}; dst=$${l#*:}; \
 	  mkdir -p "$$(dirname "$$dst")" && ln -sfn "$$src" "$$dst" && echo "linked $$dst"; \
 	done
+	@dst="$(CONFIG)/sublime-merge/Packages/User"; mkdir -p "$$dst"; \
+	 for src in "$(CURDIR)"/extras/sublime-merge/*; do \
+	   ln -sfn "$$src" "$$dst/$${src##*/}" && echo "linked $$dst/$${src##*/}"; \
+	 done
 	@bat=$$(command -v batcat || command -v bat); \
 	 if [ -n "$$bat" ]; then "$$bat" cache --build >/dev/null && echo "rebuilt bat's theme cache"; fi
 	@$(MAKE) --no-print-directory install-zen

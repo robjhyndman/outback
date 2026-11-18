@@ -69,6 +69,11 @@ To try your changes, run `make install-extras` once; the symlinks then pick up e
 
 Zen's `userChrome.css` sets the browser's CSS colour variables from Positron colour keys (the `ZEN_*` tables in `extras.py`). Zen sets many of them inline from the workspace gradient, so each value is `!important`. The variable names come from Zen's stylesheets (`zen-styles/zen-theme.css` in `browser/omni.ja`) and change between Zen releases.
 
+Sublime Merge's theme extends its built-in Merge Dark theme and sets Merge Dark's colour variables (`SM_VARS` in `extras.py`) to palette colours.
+The diffs, commit messages and text fields use a Sublime colour scheme built from the token rules, as bat's is.
+Merge Dark's variables are in `Merge Dark.sublime-theme` inside `Packages/Theme - Merge.sublime-package` (a zip) in a Sublime Merge install.
+After `make theme`, switch Sublime Merge to another theme and back to load the changes.
+
 RStudio's editor (Ace) has its own token names, so `RSTUDIO_TOKENS` in `extras.py` maps CSS selectors for them to the TextMate scope whose Positron colour each should copy.
 Two cases need `:has()`: link text is a `keyword` token, as R's `if` is, so it is picked out by the URL that follows it; and unquoted YAML values are plain text, so they take their colour from a line that has a YAML key.
 The token names come from RStudio's mode files (`mode/*_highlight_rules`), bundled in `www/rstudio/*.cache.js` in an RStudio install.

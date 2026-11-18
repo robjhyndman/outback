@@ -3,7 +3,7 @@
 A warm dark theme with colours inspired by Central Australia: red earth, ochre, spinifex gold and a clear desert sky.
 It is tuned for reading and writing Quarto documents and R code, and works well with any language.
 
-Outback is available for [Positron and VS Code](#positron-and-vs-code), [RStudio](#rstudio), [Zed](#zed), [Konsole](#konsole), [KDE Plasma](#kde-plasma), [batcat](#batcat), [eza](#eza) and [Zen](#zen).
+Outback is available for [Positron and VS Code](#positron-and-vs-code), [RStudio](#rstudio), [Zed](#zed), [Konsole](#konsole), [KDE Plasma](#kde-plasma), [batcat](#batcat), [eza](#eza), [Zen](#zen) and [Sublime Merge](#sublime-merge).
 
 ![A Quarto document in Positron with the Outback theme, beside a terminal listing files with eza](https://raw.githubusercontent.com/robjhyndman/outback/main/images/screenshot.png)
 
@@ -137,6 +137,22 @@ curl -fsSL -o chrome/userChrome.css \
 ```
 
 In `about:config`, set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`, then restart Zen.
+
+### Sublime Merge
+
+```bash
+d=~/.config/sublime-merge/Packages/User
+base=https://raw.githubusercontent.com/robjhyndman/outback/main/extras/sublime-merge
+for f in "Outback.sublime-theme" "Outback.sublime-color-scheme" \
+         "Widget - Outback.hidden-color-scheme" "Widget - Outback.sublime-settings" \
+         "Diff - Outback.sublime-settings" "Commit Message - Outback.sublime-settings" \
+         "File Mode - Outback.sublime-settings" "Git Output - Outback.sublime-settings"; do
+  curl -fsSL -o "$d/$f" "$base/${f// /%20}"
+done
+```
+
+On macOS and Windows, set `d` to the `User` folder that Preferences → Browse Packages opens.
+Then choose Preferences → Edit Settings and add `"theme": "Outback.sublime-theme"`.
 
 ## Contributing
 

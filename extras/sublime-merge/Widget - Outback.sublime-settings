@@ -1,0 +1,6 @@
+// Outback: generated from themes/outback.json by extras.py
+// (https://github.com/robjhyndman/outback). Don't edit by hand; run `make extras`.
+{
+	"color_scheme": "Widget - Outback.hidden-color-scheme",
+	"draw_shadows": false
+}
