@@ -29,7 +29,7 @@ Positron runs the installed copy of the extension, so run `make install` and rel
 Every Outback colour is named once, in `palette.toml`: hues such as ochre `#ee7a3c`, spinifex `#ffc852` and eucalyptus `#abc4b8`, and greys from night `#1a1513` to ghost gum `#fff2f0`.
 `src/outback.json` is the theme with colours written by name: `"$ochre"`, or `"$ochre/59"` for ochre with alpha `59` (hex).
 `make theme` (run by `make package` and `make install`) builds `themes/outback.json` from the two, and then `extras/` from that, so don't edit those files by hand.
-`make check` fails if any of them is out of date.
+`make check` fails if any of them is out of date; GitHub runs it on every push and pull request.
 The build also fails on a name that isn't in the palette, a palette colour the theme never uses, or a raw hex colour in `src/outback.json`.
 
 ## Change a colour
