@@ -143,6 +143,7 @@ In `about:config`, set `toolkit.legacyUserProfileCustomizations.stylesheets` to 
 
 ```bash
 d=~/.config/sublime-merge/Packages/User
+mkdir -p "$d"
 base=https://raw.githubusercontent.com/robjhyndman/outback/main/extras/sublime-merge
 for f in "Outback.sublime-theme" "Outback.sublime-color-scheme" \
          "Widget - Outback.hidden-color-scheme" "Widget - Outback.sublime-settings" \
