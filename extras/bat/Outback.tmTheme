@@ -7,7 +7,7 @@
 	<key>author</key>
 	<string>Rob J Hyndman</string>
 	<key>comment</key>
-	<string>Outback: generated from themes/outback.json by extras.py (https://github.com/robjhyndman/outback). Don't edit by hand; run `make extras`.</string>
+	<string>Outback: generated from themes/outback.json by extras.py (https://github.com/robjhyndman/outback). Don't edit by hand; run `make theme`.</string>
 	<key>settings</key>
 	<array>
 		<dict>

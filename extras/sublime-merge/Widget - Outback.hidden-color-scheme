@@ -1,5 +1,5 @@
 // Outback: generated from themes/outback.json by extras.py
-// (https://github.com/robjhyndman/outback). Don't edit by hand; run `make extras`.
+// (https://github.com/robjhyndman/outback). Don't edit by hand; run `make theme`.
 {
 	"name": "Outback Widgets",
 	"author": "Rob J Hyndman",

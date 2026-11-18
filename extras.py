@@ -34,7 +34,7 @@ ZEN_PREFS_OUT = ROOT / "extras/zen/user.js"
 
 # Header for the generated files; the Zed theme (JSON) has no room for one.
 NOTE = ["Outback: generated from themes/outback.json by extras.py",
-        "(https://github.com/robjhyndman/outback). Don't edit by hand; run `make extras`."]
+        "(https://github.com/robjhyndman/outback). Don't edit by hand; run `make theme`."]
 
 TRANSPARENT = "#00000000"
 

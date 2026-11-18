@@ -51,7 +51,7 @@ To update one, download it again.
 Or install it from a terminal:
 
 ```bash
-positron --install-extension outback-0.0.1.vsix   # or: code --install-extension ...
+positron --install-extension outback-*.vsix   # or: code --install-extension ...
 ```
 
 To uninstall, find **Outback** in the Extensions view and choose **Uninstall**.

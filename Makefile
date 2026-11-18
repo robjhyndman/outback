@@ -5,7 +5,7 @@ EDITOR_CLI ?= positron
 VERSION := $(shell python3 -I -c "import json; print(json.load(open('package.json'))['version'])")
 VSIX := build/outback-$(VERSION).vsix
 
-.PHONY: install package theme extras install-extras install-zen check clean
+.PHONY: install package theme install-extras install-zen check clean
 
 install: package
 	$(EDITOR_CLI) --install-extension $(VSIX) --force
@@ -24,8 +24,6 @@ package: theme
 theme:
 	python3 -I build.py
 	python3 -I extras.py
-
-extras: theme
 
 # Symlink the extras where each app looks for them, so a pull and rebuild updates them.
 CONFIG := $(or $(XDG_CONFIG_HOME),$(HOME)/.config)

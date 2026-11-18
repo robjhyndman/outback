@@ -1,5 +1,5 @@
 # Outback: generated from palette.toml by extras.py
-# (https://github.com/robjhyndman/outback). Don't edit by hand; run `make extras`.
+# (https://github.com/robjhyndman/outback). Don't edit by hand; run `make theme`.
 filekinds:
   directory: {foreground: "#ee7a3c", is_bold: true, is_underline: false} # ochre
   symlink: {foreground: "#abc4b8", is_bold: false, is_underline: false} # eucalyptus
