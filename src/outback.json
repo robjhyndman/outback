@@ -1,7 +1,7 @@
 {
   "name": "Outback",
   "type": "dark",
-  "author": "Rob Hyndman",
+  "author": "Rob J Hyndman",
   "semanticHighlighting": true,
   "colors": {
     "actionBar.toggledBackground": "$burnt",

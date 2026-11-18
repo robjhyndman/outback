@@ -63,28 +63,28 @@ Nested divs inside are handled, including ones that use the same number of colon
 
 ## Other apps
 
-`extras.py` generates the themes in `extras/` from `themes/outback.json`.
+`build.py` also builds the themes in `extras/` from `themes/outback.json` and the palette.
 Zed maps Positron's colour keys and TextMate scopes onto its own theme keys, Konsole uses the terminal colours, KDE uses the window and list colours, bat copies the token rules as they are, and eza takes its file colours from the palette.
 To try your changes, run `make install-extras` once; the symlinks then pick up each `make theme`.
 
-Zen's `userChrome.css` sets the browser's CSS colour variables from Positron colour keys (the `ZEN_*` tables in `extras.py`). Zen sets many of them inline from the workspace gradient, so each value is `!important`. The variable names come from Zen's stylesheets (`zen-styles/zen-theme.css` in `browser/omni.ja`) and change between Zen releases.
+Zen's `userChrome.css` sets the browser's CSS colour variables from Positron colour keys (the `ZEN_*` tables in `build.py`). Zen sets many of them inline from the workspace gradient, so each value is `!important`. The variable names come from Zen's stylesheets (`zen-styles/zen-theme.css` in `browser/omni.ja`) and change between Zen releases.
 
-Sublime Merge's theme extends its built-in Merge Dark theme and sets Merge Dark's colour variables (`SM_VARS` in `extras.py`) to palette colours.
+Sublime Merge's theme extends its built-in Merge Dark theme and sets Merge Dark's colour variables (`SM_VARS` in `build.py`) to palette colours.
 The diffs, commit messages and text fields use a Sublime colour scheme built from the token rules, as bat's is.
 Merge Dark's variables are in `Merge Dark.sublime-theme` inside `Packages/Theme - Merge.sublime-package` (a zip) in a Sublime Merge install.
 After `make theme`, switch Sublime Merge to another theme and back to load the changes.
 
-RStudio's editor (Ace) has its own token names, so `RSTUDIO_TOKENS` in `extras.py` maps CSS selectors for them to the TextMate scope whose Positron colour each should copy.
+RStudio's editor (Ace) has its own token names, so `RSTUDIO_TOKENS` in `build.py` maps CSS selectors for them to the TextMate scope whose Positron colour each should copy.
 Two cases need `:has()`: link text is a `keyword` token, as R's `if` is, so it is picked out by the URL that follows it; and unquoted YAML values are plain text, so they take their colour from a line that has a YAML key.
 The token names come from RStudio's mode files (`mode/*_highlight_rules`), bundled in `www/rstudio/*.cache.js` in an RStudio install.
 
 ### Add an app
 
-1. In `extras.py`, write a function that returns the new theme file as text.
+1. In `build.py`, write a function that returns the new theme file as text.
    Take colours from the Positron theme with `t.color("<colour key>")` and `t.resolve("<scope>", "foreground")`, or from the palette with `pick(palette, "<name>", "<where>")`.
    Start the file with the `NOTE` lines as comments.
 2. Add an output path constant next to the others, and add `(path, function(...))` to `outputs` in `main()`.
-3. Add a line for the app to the docstring at the top of `extras.py`.
+3. Add a line for the app to the docstring at the top of `build.py`.
 4. Add `<app>/<file>:<where the app looks for it>` to `LINKS` in the `Makefile`.
 5. Run `make theme`, then `make install-extras`, and check the result in the app.
 6. In `README.md`, add the app to the list at the top and give it an install section.

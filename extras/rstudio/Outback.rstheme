@@ -1,6 +1,6 @@
 /* rs-theme-name: Outback */
 /* rs-theme-is-dark: TRUE */
-/* Outback: generated from themes/outback.json by extras.py */
+/* Outback: generated from themes/outback.json by build.py */
 /* (https://github.com/robjhyndman/outback). Don't edit by hand; run `make theme`. */
 .ace_editor,
 .ace_editor_theme .profvis-flamegraph,

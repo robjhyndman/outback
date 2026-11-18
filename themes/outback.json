@@ -2,7 +2,7 @@
   "name": "Outback",
   "$comment": "Generated from palette.toml and src/outback.json by build.py. Don't edit by hand; run make theme.",
   "type": "dark",
-  "author": "Rob Hyndman",
+  "author": "Rob J Hyndman",
   "semanticHighlighting": true,
   "colors": {
     "actionBar.toggledBackground": "#413836",

@@ -1,4 +1,4 @@
-# Outback: generated from palette.toml by extras.py
+# Outback: generated from palette.toml by build.py
 # (https://github.com/robjhyndman/outback). Don't edit by hand; run `make theme`.
 filekinds:
   directory: {foreground: "#ee7a3c", is_bold: true, is_underline: false} # ochre

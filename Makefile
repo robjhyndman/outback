@@ -23,7 +23,6 @@ package: theme
 # and the themes for other apps in extras/ from those two.
 theme:
 	python3 -I build.py
-	python3 -I extras.py
 
 # Symlink the extras where each app looks for them, so a pull and rebuild updates them.
 CONFIG := $(or $(XDG_CONFIG_HOME),$(HOME)/.config)
@@ -72,7 +71,6 @@ install-zen:
 
 check:
 	python3 -I build.py --check
-	python3 -I extras.py --check
 
 clean:
 	rm -rf build
