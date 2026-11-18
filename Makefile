@@ -33,7 +33,8 @@ DATA   := $(or $(XDG_DATA_HOME),$(HOME)/.local/share)
 LINKS  := zed/outback.json:$(CONFIG)/zed/themes/outback.json \
           konsole/Outback.colorscheme:$(DATA)/konsole/Outback.colorscheme \
           kde/Outback.colors:$(DATA)/color-schemes/Outback.colors \
-          bat/Outback.tmTheme:$(CONFIG)/bat/themes/Outback.tmTheme
+          bat/Outback.tmTheme:$(CONFIG)/bat/themes/Outback.tmTheme \
+          eza/theme.yml:$(CONFIG)/eza/theme.yml
 
 install-extras:
 	@for l in $(LINKS); do \

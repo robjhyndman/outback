@@ -1,0 +1,20 @@
+# Outback: generated from palette.toml by extras.py
+# (https://github.com/robjhyndman/outback). Don't edit by hand; run `make extras`.
+filekinds:
+  directory: {foreground: "#ee7a3c", is_bold: true, is_underline: false} # ochre
+  symlink: {foreground: "#abc4b8", is_bold: false, is_underline: false} # eucalyptus
+symlink_path: {foreground: "#abc4b8", is_bold: false, is_underline: false} # eucalyptus
+size:
+  number_byte: {foreground: "#c4b7b6", is_bold: false, is_underline: false} # saltpan
+  number_kilo: {foreground: "#c4b7b6", is_bold: false, is_underline: false} # saltpan
+  number_mega: {foreground: "#c4b7b6", is_bold: false, is_underline: false} # saltpan
+  number_giga: {foreground: "#c4b7b6", is_bold: false, is_underline: false} # saltpan
+  number_huge: {foreground: "#c4b7b6", is_bold: false, is_underline: false} # saltpan
+  unit_byte: {foreground: "#c4b7b6", is_bold: false, is_underline: false} # saltpan
+  unit_kilo: {foreground: "#c4b7b6", is_bold: false, is_underline: false} # saltpan
+  unit_mega: {foreground: "#c4b7b6", is_bold: false, is_underline: false} # saltpan
+  unit_giga: {foreground: "#c4b7b6", is_bold: false, is_underline: false} # saltpan
+  unit_huge: {foreground: "#c4b7b6", is_bold: false, is_underline: false} # saltpan
+date: {foreground: "#94c8f0", is_bold: false, is_underline: false} # sky
+file_type:
+  build: {foreground: "#ffc852", is_bold: false, is_underline: false} # spinifex

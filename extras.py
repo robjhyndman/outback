@@ -2,8 +2,8 @@
 """Build the Outback themes for other apps from themes/outback.json and palette.toml.
 
 The Zed theme, Konsole colour scheme, KDE colour scheme and bat (tmTheme) theme map
-Positron colour keys and TextMate scopes, so they are generated from the Positron theme
-and written to extras/.
+Positron colour keys and TextMate scopes, so they are generated from the Positron theme.
+The eza theme picks colours by palette name. All are written to extras/.
 
 Usage:
     python3 -I extras.py           # rewrite extras/
@@ -23,6 +23,7 @@ ZED_OUT = ROOT / "extras/zed/outback.json"
 KONSOLE_OUT = ROOT / "extras/konsole/Outback.colorscheme"
 KDE_OUT = ROOT / "extras/kde/Outback.colors"
 BAT_OUT = ROOT / "extras/bat/Outback.tmTheme"
+EZA_OUT = ROOT / "extras/eza/theme.yml"
 
 # Header for the generated files; the Zed theme (JSON) has no room for one.
 NOTE = ["Outback: generated from themes/outback.json by extras.py",
@@ -469,12 +470,43 @@ def pick(palette, name, where):
     return palette[name]
 
 
+# eza: theme.yml key -> (palette name, bold). Styles merge with eza's defaults, which
+# make some of these bold or underlined, so every entry sets bold and underline.
+# Anything not listed keeps eza's default, coloured through the ANSI palette.
+SIZE = [f"{part}_{unit}" for part in ("number", "unit") for unit in ("byte", "kilo", "mega", "giga", "huge")]
+EZA = {
+    "filekinds": {"directory": ("ochre", True), "symlink": ("eucalyptus", False)},
+    "symlink_path": ("eucalyptus", False),
+    "size": {k: ("saltpan", False) for k in SIZE},
+    "date": ("sky", False),
+    "file_type": {"build": ("spinifex", False)},  # Makefile, README, ...
+}
+
+
+def eza(palette):
+    """eza's theme.yml. eza's ANSI-palette defaults look like a coral reef in Outback."""
+    def style(name, bold, where):
+        c = pick(palette, name, f"eza {where}")
+        b = "true" if bold else "false"
+        return f'{{foreground: "{c}", is_bold: {b}, is_underline: false}} # {name}'
+
+    out = [f"# {n}" for n in [NOTE[0].replace("themes/outback.json", "palette.toml"), *NOTE[1:]]]
+    for key, val in EZA.items():
+        if isinstance(val, tuple):
+            out.append(f"{key}: {style(*val, key)}")
+        else:
+            out.append(f"{key}:")
+            out += [f"  {k}: {style(*v, k)}" for k, v in val.items()]
+    return "\n".join(out) + "\n"
+
+
 def main():
     check = "--check" in sys.argv[1:]
     t = Theme(SRC)
     pal = load_palette()
     stale = []
-    outputs = ((ZED_OUT, zed(t)), (KONSOLE_OUT, konsole(t)), (KDE_OUT, kde(t, pal)), (BAT_OUT, bat(t)))
+    outputs = ((ZED_OUT, zed(t)), (KONSOLE_OUT, konsole(t)), (KDE_OUT, kde(t, pal)), (BAT_OUT, bat(t)),
+               (EZA_OUT, eza(pal)))
     for path, text in outputs:
         current = path.read_text() if path.exists() else None
         if current == text:
