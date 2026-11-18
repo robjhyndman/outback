@@ -3,6 +3,7 @@
 
 The Zed theme, Konsole colour scheme, KDE colour scheme and bat (tmTheme) theme map
 Positron colour keys and TextMate scopes, so they are generated from the Positron theme.
+The RStudio theme maps RStudio's own (Ace) token classes onto TextMate scopes.
 The eza theme picks colours by palette name. All are written to extras/.
 
 Usage:
@@ -24,6 +25,7 @@ KONSOLE_OUT = ROOT / "extras/konsole/Outback.colorscheme"
 KDE_OUT = ROOT / "extras/kde/Outback.colors"
 BAT_OUT = ROOT / "extras/bat/Outback.tmTheme"
 EZA_OUT = ROOT / "extras/eza/theme.yml"
+RSTUDIO_OUT = ROOT / "extras/rstudio/Outback.rstheme"
 
 # Header for the generated files; the Zed theme (JSON) has no room for one.
 NOTE = ["Outback: generated from themes/outback.json by extras.py",
@@ -500,13 +502,201 @@ def eza(palette):
     return "\n".join(out) + "\n"
 
 
+# RStudio's Ace modes use their own token names, so each rule maps CSS selectors to the
+# TextMate scope whose Positron colour and style it should copy. Ace gives each dotted
+# part of a token its own class ("constant.numeric.text" -> .ace_constant.ace_numeric.ace_text),
+# so the more specific selectors later on override the general ones.
+RSTUDIO_TOKENS = [
+    ([".ace_keyword", ".ace_meta", ".ace_storage", ".ace_storage.ace_type"], "keyword.control"),
+    ([".ace_keyword.ace_operator", ".ace_paren"], "keyword.operator"),
+    # Commas and semicolons when "Highlight R function calls" is on.
+    ([".ace_punctuation", ".ace_punctuation.ace_keyword.ace_operator"], "punctuation.separator"),
+    ([".ace_constant.ace_language", ".ace_constant.ace_numeric", ".ace_constant.ace_character",
+      ".ace_support.ace_constant", ".ace_variable.ace_language"], "constant.numeric"),
+    ([".ace_constant.ace_language.ace_escape"], "constant.character.escape"),
+    ([".ace_string"], "string"),
+    ([".ace_string.ace_regexp"], "string.regexp"),
+    ([".ace_comment", ".ace_comment.ace_keyword.ace_operator"], "comment"),
+    ([".ace_identifier", ".ace_variable"], "variable"),
+    ([".ace_entity.ace_name.ace_function", ".ace_identifier.ace_support.ace_function"],
+     "entity.name.function"),
+    # Package names before :: when "Highlight R function calls" is on.
+    ([".ace_support.ace_class", ".ace_support.ace_type", ".ace_entity.ace_name.ace_type",
+      ".ace_identifier.ace_support.ace_class"], "entity.name.namespace"),
+    ([".ace_entity.ace_other.ace_attribute-name"], "entity.other.attribute-name"),
+    ([".ace_entity.ace_name.ace_tag"], "entity.name.tag"),
+    ([".ace_meta.ace_tag.ace_punctuation"], "punctuation.definition.tag"),
+    # YAML keys, in the front matter and in #| chunk options.
+    ([".ace_meta.ace_tag"], "entity.name.tag.yaml"),
+    ([".ace_list.ace_markup.ace_keyword.ace_operator"], "punctuation.definition.list.begin.markdown"),
+    # Markdown: inline code, including `r ...`; code chunks and front matter fences.
+    ([".ace_support.ace_function"], "markup.inline.raw"),
+    ([".ace_support.ace_function.ace_codebegin", ".ace_support.ace_function.ace_codeend"],
+     "punctuation.definition.quarto"),
+    ([".ace_markup.ace_heading"], "punctuation.definition.heading"),
+    ([".ace_heading"], "entity.name.section"),
+    ([".ace_constant.ace_numeric.ace_text"], "markup.bold"),
+    ([".ace_constant.ace_language.ace_boolean.ace_text"], "markup.italic"),
+    ([".ace_markup.ace_href"], "markup.underline.link"),
+    # Cross-references such as @fig-beer, and citations.
+    ([".ace_markup.ace_list"], "keyword.control.import.reference"),
+    ([".ace_latex", ".ace_latex.ace_support.ace_function", ".ace_latex.ace_markup.ace_list.ace_string"],
+     "markup.math.inline.markdown"),
+    ([".ace_string.ace_blockquote"], "markup.quote"),
+    ([".ace_constant.ace_hr"], "meta.separator"),
+    # Link text is a "keyword" token, as R's `if` is, so pick it out by what follows:
+    # the URL in [text](url), or the label in [text][label].
+    ([".ace_keyword:has(+ .ace_markup.ace_href)",
+      ".ace_keyword:has(+ .ace_constant:not(.ace_language):not(.ace_numeric))"],
+     "string.other.link.title"),
+    # Quarto ::: divs, which RStudio colours by nesting depth unless that option is off.
+    ([f".ace_editor .ace_fenced_div{s}_{i}" for i in range(7) for s in ("", "_text")],
+     "markup.heading.div.quarto"),
+    # Unquoted YAML values are plain text, so colour the text on a line that has a YAML key.
+    ([".ace_line:has(> .ace_meta.ace_tag:not(.ace_xml))"], "string.unquoted.plain.out.yaml"),
+]
+
+
+def css_style(t, scope):
+    """CSS declarations for the colour and font style VS Code would give scope."""
+    color = (t.resolve(scope, "foreground") or t.color("editor.foreground")).lower()
+    fs = (t.resolve(scope, "fontStyle") or "").split()
+    out = [f"color: {color}"]
+    out.append("font-weight: bold" if "bold" in fs else "font-weight: normal")
+    if "italic" in fs:
+        out.append("font-style: italic")
+    return out
+
+
+def css_rule(selectors, decls):
+    return ",\n".join(selectors) + " {\n" + "".join(f"  {d};\n" for d in decls) + "}"
+
+
+def xterm256():
+    """The standard xterm colours 16-255: a 6x6x6 cube, then 24 greys."""
+    levels = [0, 95, 135, 175, 215, 255]
+    cube = [f"#{levels[r]:02x}{levels[g]:02x}{levels[b]:02x}"
+            for r in range(6) for g in range(6) for b in range(6)]
+    return cube + [f"#{8 + 10 * i:02x}" * 3 for i in range(24)]
+
+
+def rstudio(t, palette):
+    """RStudio editor theme (.rstheme): CSS for Ace, RStudio's editor and console."""
+    c = t.color
+    bg, fg = c("editor.background"), c("editor.foreground")
+    line = c("editor.lineHighlightBackground")
+    # Code chunks get a faint lift, like Positron's range highlight.
+    hl = c("editor.rangeHighlightBackground")
+    chunk = mix(bg, hl[:7], int(hl[7:], 16) / 255)
+    guide = c("editorIndentGuide.background")
+
+    rules = [
+        css_rule([".ace_editor", ".ace_editor_theme .profvis-flamegraph", ".ace_editor_theme"],
+                 [f"background-color: {bg}", f"color: {fg}"]),
+        css_rule([".ace_gutter"], [f"background: {c('editorGutter.background')}",
+                                   f"color: {c('editorLineNumber.foreground')}"]),
+        css_rule([".ace_gutter-active-line"], [f"background-color: {line}",
+                                               f"color: {c('editorLineNumber.activeForeground')}"]),
+        css_rule([".ace_print-margin"], ["width: 1px", f"background: {guide}"]),
+        css_rule([".ace_cursor"], [f"color: {c('editorCursor.foreground')}"]),
+        css_rule([".ace_marker-layer .ace_selection"], [f"background: {c('editor.selectionBackground')}"]),
+        css_rule([".ace_selection.ace_start"], [f"box-shadow: 0 0 3px 0px {bg}", "border-radius: 2px"]),
+        css_rule([".ace_marker-layer .ace_step"], [f"background: {c('editor.stackFrameHighlightBackground')}"]),
+        css_rule([".ace_marker-layer .ace_bracket"],
+                 ["margin: -1px 0 0 -1px", f"border: 1px solid {c('editorBracketMatch.border')}",
+                  f"background: {c('editorBracketMatch.background')}"]),
+        css_rule([".ace_marker-layer .ace_active-line"], [f"background: {line}"]),
+        css_rule([".ace_marker-layer .ace_selected-word"],
+                 [f"background: {c('editor.wordHighlightBackground')}", "border: none"]),
+        css_rule([".ace_invisible"], [f"color: {c('editorWhitespace.foreground')}"]),
+        css_rule([".ace_indent-guide"], [f"background: linear-gradient(to left, {guide} 1px, transparent 1px)"]),
+        css_rule([".ace_fold"], [f"background-color: {c('textLink.foreground')}", f"border-color: {fg}"]),
+        css_rule([".ace_invalid"], [f"color: {c('errorForeground')}"]),
+        css_rule([".ace_invalid.ace_deprecated"], [f"color: {c('errorForeground')}", "text-decoration: line-through"]),
+        css_rule([".ace_marker-layer .ace_foreign_line"],
+                 ["position: absolute", "z-index: -1", f"background-color: {chunk}"]),
+        css_rule([".ace_node-selector"], [f"background-color: {c('focusBorder')}"]),
+        css_rule([".ace_comment-highlight"], [f"color: {bg}", f"background-color: {c('editorWarning.foreground')}"]),
+        css_rule([".ace_marker-layer .ace_active_debug_line"],
+                 ["position: absolute", "z-index: -1", f"background-color: {c('editor.stackFrameHighlightBackground')}"]),
+        css_rule([".ace_marker-layer .ace_find_line"],
+                 ["position: absolute", "z-index: -1", f"background-color: {c('editor.findMatchHighlightBackground')}"]),
+        css_rule([".ace_console_error"], [f"background-color: {mix(bg, c('errorForeground'), 0.12)}"]),
+    ]
+    rules += [css_rule(sels, css_style(t, scope)) for sels, scope in RSTUDIO_TOKENS]
+
+    # Rainbow parentheses (an RStudio option) cycle through Positron's bracket colours.
+    rules += [css_rule([f".ace_editor .ace_paren.ace_paren_color_{i}"],
+                       [f"color: {c(f'editorBracketHighlight.foreground{i % 6 + 1}')}"])
+              for i in range(7)]
+    # Rainbow indent guides and fills (also options), in seven Outback hues.
+    hues = [pick(palette, n, "rstudio indent guides")
+            for n in ("ochre", "spinifex", "new-growth", "waterhole", "sky", "mulla-mulla", "desert-rose")]
+    for i, h in enumerate(hues, 1):
+        rules.append(css_rule([f".rstudio_rainbow_indent_guides .ace_line .ace_indent-guide:nth-child(7n+{i})"],
+                              [f"background: linear-gradient(to left, {h}bb 1px, transparent 1px, transparent)"]))
+    for i, h in enumerate(hues, 1):
+        rules.append(css_rule([f".rstudio_rainbow_indent_fills .ace_line .ace_indent-guide:nth-child(7n+{i})"],
+                              [f"background: linear-gradient(to left, {h}bb 1px, {h}33 1px, {h}33)"]))
+
+    # Autocompletion popup, like Positron's suggestion widget.
+    rules += [
+        css_rule([".rstudio-themes-dark-menus .ace_editor.ace_autocomplete"],
+                 [f"background: {c('editorWidget.background')}",
+                  f"border: solid 1px {c('editorWidget.border')} !important", f"color: {fg}"]),
+        css_rule([".rstudio-themes-dark-menus .ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line",
+                  ".rstudio-themes-dark-menus .ace_editor.ace_autocomplete .ace_marker-layer .ace_line-hover"],
+                 [f"background: {c('editorSuggestWidget.selectedBackground')}", "border: none"]),
+        css_rule([".editor_dark.ace_editor_theme a"], [f"color: {c('textLink.foreground')} !important"]),
+        # Layer order RStudio adds to every theme, so the margin line shows over chunks.
+        css_rule([".ace_layer"], ["z-index: 3"]),
+        css_rule([".ace_layer.ace_print-margin-layer"], ["z-index: 2"]),
+        css_rule([".ace_layer.ace_marker-layer"], ["z-index: 1"]),
+    ]
+
+    # Terminal, as in Positron.
+    tbg, tfg, cursor = c("terminal.background"), c("terminal.foreground"), c("terminalCursor.foreground")
+    rules += [
+        css_rule([".terminal"], [f"background-color: {tbg}", f"color: {tfg}", 'font-feature-settings: "liga" 0',
+                                 "position: relative", "user-select: none", "-ms-user-select: none",
+                                 "-webkit-user-select: none"]),
+        css_rule([".terminal.xterm-cursor-style-block.focus:not(.xterm-cursor-blink-on) .terminal-cursor"],
+                 [f"background-color: {cursor}", f"color: {tbg}"]),
+        css_rule([".terminal.focus.xterm-cursor-style-bar:not(.xterm-cursor-blink-on) .terminal-cursor::before",
+                  ".terminal.focus.xterm-cursor-style-underline:not(.xterm-cursor-blink-on) .terminal-cursor::before"],
+                 ["content: ''", "position: absolute", f"background-color: {cursor}"]),
+        css_rule([".terminal:not(.focus) .terminal-cursor"], [f"outline: 1px solid {cursor}", "outline-offset: -1px"]),
+        css_rule([".terminal .xterm-selection div"],
+                 ["position: absolute", f"background-color: {c('terminal.selectionBackground')}"]),
+        css_rule([".terminal .xterm-viewport"], [f"background-color: {tbg}", "overflow-y: scroll"]),
+    ]
+    xterm = [
+        f".xtermInvertColor {{ color: {tbg}; }}",
+        f".xtermInvertBgColor {{ background-color: {tfg}; }}",
+        ".xtermBold { font-weight: bold; }",
+        ".xtermBlur { filter: brightness(75%); }",
+        ".xtermUnderline { text-decoration: underline; }",
+        ".xtermBlink { text-decoration: blink; }",
+        ".xtermHidden { visibility: hidden; }",
+        ".xtermItalic { font-style: italic; }",
+        ".xtermStrike { text-decoration: line-through; }",
+    ]
+    colours = [c(f"terminal.ansi{n}") for n in ANSI] + [c(f"terminal.ansiBright{n}") for n in ANSI] + xterm256()
+    for i, col in enumerate(colours):
+        xterm += [f".xtermColor{i} {{ color: {col} !important; }}",
+                  f".xtermBgColor{i} {{ background-color: {col}; }}"]
+
+    head = ["/* rs-theme-name: Outback */", "/* rs-theme-is-dark: TRUE */"] + [f"/* {n} */" for n in NOTE]
+    return "\n".join(head + rules + xterm) + "\n"
+
+
 def main():
     check = "--check" in sys.argv[1:]
     t = Theme(SRC)
     pal = load_palette()
     stale = []
     outputs = ((ZED_OUT, zed(t)), (KONSOLE_OUT, konsole(t)), (KDE_OUT, kde(t, pal)), (BAT_OUT, bat(t)),
-               (EZA_OUT, eza(pal)))
+               (EZA_OUT, eza(pal)), (RSTUDIO_OUT, rstudio(t, pal)))
     for path, text in outputs:
         current = path.read_text() if path.exists() else None
         if current == text:

@@ -34,7 +34,8 @@ LINKS  := zed/outback.json:$(CONFIG)/zed/themes/outback.json \
           konsole/Outback.colorscheme:$(DATA)/konsole/Outback.colorscheme \
           kde/Outback.colors:$(DATA)/color-schemes/Outback.colors \
           bat/Outback.tmTheme:$(CONFIG)/bat/themes/Outback.tmTheme \
-          eza/theme.yml:$(CONFIG)/eza/theme.yml
+          eza/theme.yml:$(CONFIG)/eza/theme.yml \
+          rstudio/Outback.rstheme:$(CONFIG)/rstudio/themes/Outback.rstheme
 
 install-extras:
 	@for l in $(LINKS); do \
