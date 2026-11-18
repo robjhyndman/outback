@@ -5,7 +5,7 @@ EDITOR_CLI ?= positron
 VERSION := $(shell python3 -I -c "import json; print(json.load(open('package.json'))['version'])")
 VSIX := build/outback-$(VERSION).vsix
 
-.PHONY: install package theme extras install-extras check clean
+.PHONY: install package theme extras install-extras install-zen check clean
 
 install: package
 	$(EDITOR_CLI) --install-extension $(VSIX) --force
@@ -44,6 +44,29 @@ install-extras:
 	done
 	@bat=$$(command -v batcat || command -v bat); \
 	 if [ -n "$$bat" ]; then "$$bat" cache --build >/dev/null && echo "rebuilt bat's theme cache"; fi
+	@$(MAKE) --no-print-directory install-zen
+
+# Zen keeps userChrome.css in its default profile, whose folder name is random:
+# installs.ini names the profile this install uses, else profiles.ini's Default=1.
+# Zen moved its profiles from ~/.zen to ~/.config/zen, so the first folder found wins.
+ZEN_DIRS := $(HOME)/.var/app/app.zen_browser.zen/config/zen $(CONFIG)/zen \
+            $(HOME)/.var/app/app.zen_browser.zen/.zen $(HOME)/.zen
+
+install-zen:
+	@for d in $(ZEN_DIRS); do \
+	  [ -f "$$d/profiles.ini" ] || continue; \
+	  p=$$(awk -F= '$$1 == "Default" { print $$2; exit }' "$$d/installs.ini" 2>/dev/null); \
+	  [ -n "$$p" ] || p=$$(awk -F= '/^\[/ { path = "" } $$1 == "Path" { path = $$2 } \
+	    $$1 == "Default" && $$2 == "1" && path != "" { print path; exit }' "$$d/profiles.ini"); \
+	  [ -n "$$p" ] || continue; \
+	  case "$$p" in /*) prof="$$p" ;; *) prof="$$d/$$p" ;; esac; \
+	  mkdir -p "$$prof/chrome" && ln -sfn "$(CURDIR)/extras/zen/userChrome.css" "$$prof/chrome/userChrome.css" && \
+	    echo "linked $$prof/chrome/userChrome.css"; \
+	  if [ -e "$$prof/user.js" ] && [ ! -L "$$prof/user.js" ]; then \
+	    echo "$$prof/user.js exists; add the line in extras/zen/user.js to it"; \
+	  else ln -sfn "$(CURDIR)/extras/zen/user.js" "$$prof/user.js" && echo "linked $$prof/user.js"; fi; \
+	  echo "restart Zen to see the changes"; break; \
+	done
 
 check:
 	python3 -I build.py --check

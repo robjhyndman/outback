@@ -21,6 +21,7 @@ Positron runs the installed copy of the extension, so run `make install` and rel
 | `make theme`          | Rebuild `themes/outback.json` and `extras/` from the sources         |
 | `make check`          | Fail if any generated file is out of date                            |
 | `make install-extras` | Symlink the `extras/` themes into place and rebuild bat's cache      |
+| `make install-zen`    | Symlink the Zen theme into Zen's default profile (run by `install-extras`) |
 | `make clean`          | Remove `build/`                                                      |
 
 ## How the theme is built
@@ -65,6 +66,8 @@ Nested divs inside are handled, including ones that use the same number of colon
 `extras.py` generates the themes in `extras/` from `themes/outback.json`.
 Zed maps Positron's colour keys and TextMate scopes onto its own theme keys, Konsole uses the terminal colours, KDE uses the window and list colours, bat copies the token rules as they are, and eza takes its file colours from the palette.
 To try your changes, run `make install-extras` once; the symlinks then pick up each `make theme`.
+
+Zen's `userChrome.css` sets the browser's CSS colour variables from Positron colour keys (the `ZEN_*` tables in `extras.py`). Zen sets many of them inline from the workspace gradient, so each value is `!important`. The variable names come from Zen's stylesheets (`zen-styles/zen-theme.css` in `browser/omni.ja`) and change between Zen releases.
 
 RStudio's editor (Ace) has its own token names, so `RSTUDIO_TOKENS` in `extras.py` maps CSS selectors for them to the TextMate scope whose Positron colour each should copy.
 Two cases need `:has()`: link text is a `keyword` token, as R's `if` is, so it is picked out by the URL that follows it; and unquoted YAML values are plain text, so they take their colour from a line that has a YAML key.

@@ -3,7 +3,7 @@
 A warm dark theme with colours inspired by Central Australia: red earth, ochre, spinifex gold and a clear desert sky.
 It is tuned for reading and writing Quarto documents and R code, and works well with any language.
 
-Outback is available for [Positron and VS Code](#positron-and-vs-code), [RStudio](#rstudio), [Zed](#zed), [Konsole](#konsole), [KDE Plasma](#kde-plasma), [batcat](#batcat) and [eza](#eza).
+Outback is available for [Positron and VS Code](#positron-and-vs-code), [RStudio](#rstudio), [Zed](#zed), [Konsole](#konsole), [KDE Plasma](#kde-plasma), [batcat](#batcat), [eza](#eza) and [Zen](#zen).
 
 ## Colours
 
@@ -122,6 +122,19 @@ curl -fsSL -o ~/.config/eza/theme.yml \
 ```
 
 eza picks up the theme automatically; set `EZA_CONFIG_DIR` if you keep its config elsewhere.
+
+### Zen
+
+The Zen theme is dark only and replaces the workspace colours.
+Find your profile folder in Zen's `about:support` (Profile Folder → **Open Directory**), then run this there:
+
+```bash
+mkdir -p chrome
+curl -fsSL -o chrome/userChrome.css \
+  https://raw.githubusercontent.com/robjhyndman/outback/main/extras/zen/userChrome.css
+```
+
+In `about:config`, set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`, then restart Zen.
 
 ## Contributing
 

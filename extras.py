@@ -4,7 +4,8 @@
 The Zed theme, Konsole colour scheme, KDE colour scheme and bat (tmTheme) theme map
 Positron colour keys and TextMate scopes, so they are generated from the Positron theme.
 The RStudio theme maps RStudio's own (Ace) token classes onto TextMate scopes.
-The eza theme picks colours by palette name. All are written to extras/.
+The eza theme picks colours by palette name. The Zen userChrome.css sets the
+browser's CSS colour variables from Positron colour keys. All are written to extras/.
 
 Usage:
     python3 -I extras.py           # rewrite extras/
@@ -26,6 +27,8 @@ KDE_OUT = ROOT / "extras/kde/Outback.colors"
 BAT_OUT = ROOT / "extras/bat/Outback.tmTheme"
 EZA_OUT = ROOT / "extras/eza/theme.yml"
 RSTUDIO_OUT = ROOT / "extras/rstudio/Outback.rstheme"
+ZEN_OUT = ROOT / "extras/zen/userChrome.css"
+ZEN_PREFS_OUT = ROOT / "extras/zen/user.js"
 
 # Header for the generated files; the Zed theme (JSON) has no room for one.
 NOTE = ["Outback: generated from themes/outback.json by extras.py",
@@ -690,13 +693,121 @@ def rstudio(t, palette):
     return "\n".join(head + rules + xterm) + "\n"
 
 
+# Zen (a Firefox-based browser) colours its UI with CSS variables, many of which it sets as
+# inline styles from the workspace gradient, so every value here is !important to win over
+# those. Each table maps a variable to a VS Code key, (key, alpha), or a Raw CSS value.
+# Variables Zen derives from these (--zen-colors-*) follow them.
+class Raw(str):
+    """A CSS value written as is, not a VS Code colour key."""
+
+
+ZEN_ROOT = {
+    "--zen-primary-color": "focusBorder",
+    "--zen-branding-dark": "sideBar.background",
+    "--zen-branding-bg": "sideBar.background",
+    "--zen-branding-bg-reverse": "foreground",
+    "--zen-colors-tertiary": "editor.background",
+    "--zen-colors-border": "sideBar.border",
+    "--zen-colors-input-bg": "input.background",
+    "--zen-input-border-color": "input.border",
+    "--zen-dialog-background": "editorWidget.background",
+    "--zen-urlbar-background": "editorWidget.background",
+    "--zen-themed-toolbar-bg-transparent": "sideBar.background",
+    "--toolbar-color-scheme": Raw("dark"),
+    "--toolbox-textcolor": "foreground",
+    "--toolbar-text-color": "foreground",
+    "--zen-toolbar-element-bg": "list.hoverBackground",
+    "--zen-toolbar-element-bg-hover": ("foreground", "19"),
+    "--toolbarbutton-background-color-hover": "list.hoverBackground",
+    "--toolbarbutton-background-color-active": ("foreground", "19"),
+    "--urlbar-box-hover-bgcolor": "list.hoverBackground",
+    "--urlbar-box-active-bgcolor": ("foreground", "19"),
+    "--toolbar-field-background-color": "input.background",
+    "--toolbar-field-focus-background-color": "input.background",
+    "--toolbar-field-border-color": "input.border",
+    "--toolbar-field-color": "foreground",
+    "--input-background-color": "input.background",
+    "--input-border-color": "input.border",
+    "--background-color-box": "editorWidget.background",
+    "--text-color": "foreground",
+    "--text-color-deemphasized": "descriptionForeground",
+    "--border-color": "editorWidget.border",
+    "--focus-outline-color": "focusBorder",
+    "--color-accent-primary": "button.background",
+    "--color-accent-primary-hover": "button.hoverBackground",
+    "--color-accent-primary-active": "button.background",
+    "--button-background-color-primary": "button.background",
+    "--button-primary-hover-bgcolor": "button.hoverBackground",
+    "--button-primary-active-bgcolor": "button.background",
+    "--button-text-color-primary": "button.foreground",
+    "--button-primary-color": "button.foreground",
+    "--in-content-primary-button-text-color": "button.foreground",
+    "--link-color": "textLink.foreground",
+    "--link-color-hover": "editorLink.activeForeground",
+    "--tab-attention-dot-color": "badge.background",
+}
+
+# Menus and panels redefine these on themselves, so they are also set there.
+ZEN_PANEL = {
+    "--panel-background-color": "menu.background",
+    "--panel-text-color": "menu.foreground",
+    "--panel-border-color": "menu.border",
+    "--arrowpanel-background": "menu.background",
+    "--arrowpanel-color": "menu.foreground",
+    "--arrowpanel-border-color": "menu.border",
+}
+
+# Zen's essentials (pinned tab tiles) set the selected colour on the tab itself.
+ZEN_TAB = {
+    "--tab-background-color-hover": "list.hoverBackground",
+    "--tab-background-color-selected": ("foreground", "19"),
+}
+
+# The workspace gradient behind the sidebar and toolbar, set inline on these two elements.
+# The -old copies are what Zen fades from when switching workspaces.
+ZEN_BACKGROUND = {
+    "--zen-main-browser-background": "sideBar.background",
+    "--zen-main-browser-background-toolbar": "sideBar.background",
+    "--zen-main-browser-background-old": "sideBar.background",
+    "--zen-main-browser-background-toolbar-old": "sideBar.background",
+    "--zen-grainy-background-opacity": Raw("0"),
+}
+
+
+def zen(t):
+    """userChrome.css for Zen: dark only, so it also forces Zen's dark colour scheme."""
+    def decls(table):
+        return [f"{var}: {spec if isinstance(spec, Raw) else t.color(spec)} !important"
+                for var, spec in table.items()]
+
+    rules = [
+        css_rule([":root"], ["color-scheme: dark !important", *decls(ZEN_ROOT)]),
+        css_rule([":root", "menupopup", "panel"], decls(ZEN_PANEL)),
+        css_rule([".tabbrowser-tab"], decls(ZEN_TAB)),
+        css_rule([":root", "#zen-browser-background", "#zen-toolbar-background"], decls(ZEN_BACKGROUND)),
+        # Context menu highlights otherwise come from the GTK theme.
+        css_rule(["menupopup > :is(menu, menuitem)[_moz-menuactive]:not([disabled])"],
+                 [f"background-color: {t.color('menu.selectionBackground')} !important",
+                  f"color: {t.color('menu.foreground')} !important"]),
+        css_rule(["::selection"], [f"background-color: {t.color('editor.selectionBackground')} !important"]),
+    ]
+    return "\n".join([f"/* {n} */" for n in NOTE] + rules) + "\n"
+
+
+def zen_prefs():
+    """user.js turning on userChrome.css, which Zen ignores by default."""
+    return "\n".join([f"// {n}" for n in NOTE] + [
+        'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);']) + "\n"
+
+
 def main():
     check = "--check" in sys.argv[1:]
     t = Theme(SRC)
     pal = load_palette()
     stale = []
     outputs = ((ZED_OUT, zed(t)), (KONSOLE_OUT, konsole(t)), (KDE_OUT, kde(t, pal)), (BAT_OUT, bat(t)),
-               (EZA_OUT, eza(pal)), (RSTUDIO_OUT, rstudio(t, pal)))
+               (EZA_OUT, eza(pal)), (RSTUDIO_OUT, rstudio(t, pal)),
+               (ZEN_OUT, zen(t)), (ZEN_PREFS_OUT, zen_prefs()))
     for path, text in outputs:
         current = path.read_text() if path.exists() else None
         if current == text:
