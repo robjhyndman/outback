@@ -52,7 +52,7 @@
   background: linear-gradient(to left, #413836 1px, transparent 1px);
 }
 .ace_fold {
-  background-color: #94c8f0;
+  background-color: #ee7a3c;
   border-color: #fff2f0;
 }
 .ace_invalid {
@@ -314,7 +314,7 @@
   border: none;
 }
 .editor_dark.ace_editor_theme a {
-  color: #94c8f0 !important;
+  color: #ee7a3c !important;
 }
 .ace_layer {
   z-index: 3;

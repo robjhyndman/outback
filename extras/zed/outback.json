@@ -31,12 +31,12 @@
         "text.muted": "#958a89",
         "text.placeholder": "#958a89",
         "text.disabled": "#5c5351",
-        "text.accent": "#94c8f0",
+        "text.accent": "#ee7a3c",
         "icon": "#fff2f0",
         "icon.muted": "#958a89",
         "icon.disabled": "#5c5351",
         "icon.placeholder": "#958a89",
-        "icon.accent": "#94c8f0",
+        "icon.accent": "#ee7a3c",
         "status_bar.background": "#1a1513",
         "title_bar.background": "#1a1513",
         "title_bar.inactive_background": "#2d2523",
@@ -158,7 +158,7 @@
         "players": [
           {
             "cursor": "#c4b7b6",
-            "background": "#94c8f0",
+            "background": "#ee7a3c",
             "selection": "#c4b7b633"
           },
           {
