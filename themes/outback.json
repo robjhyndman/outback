@@ -40,7 +40,7 @@
     "debugIcon.stepIntoForeground": "#94c8f0",
     "debugIcon.stepOutForeground": "#94c8f0",
     "debugIcon.stepOverForeground": "#94c8f0",
-    "debugTokenExpression.boolean": "#a9a9e9",
+    "debugTokenExpression.boolean": "#7eaef5",
     "debugTokenExpression.type": "#86daca",
     "debugToolBar.background": "#221c1a",
     "descriptionForeground": "#958a89",
@@ -219,13 +219,13 @@
     "terminal.ansiBrightBlue": "#f48d6e",
     "terminal.ansiBrightCyan": "#86daca",
     "terminal.ansiBrightGreen": "#aeda76",
-    "terminal.ansiBrightMagenta": "#a9a9e9",
+    "terminal.ansiBrightMagenta": "#7eaef5",
     "terminal.ansiBrightRed": "#ee7a3c",
     "terminal.ansiBrightWhite": "#fff2f0",
     "terminal.ansiBrightYellow": "#ffc852",
     "terminal.ansiCyan": "#86daca",
     "terminal.ansiGreen": "#aeda76",
-    "terminal.ansiMagenta": "#a9a9e9",
+    "terminal.ansiMagenta": "#7eaef5",
     "terminal.ansiRed": "#ee7a3c",
     "terminal.ansiWhite": "#fff2f0",
     "terminal.ansiYellow": "#ffc852",
@@ -293,7 +293,7 @@
     {
       "scope": "constant.language",
       "settings": {
-        "foreground": "#a9a9e9"
+        "foreground": "#7eaef5"
       }
     },
     {
@@ -304,7 +304,7 @@
         "keyword.operator.minus.exponent"
       ],
       "settings": {
-        "foreground": "#a9a9e9"
+        "foreground": "#7eaef5"
       }
     },
     {
@@ -450,7 +450,7 @@
     {
       "scope": "meta.preprocessor.numeric",
       "settings": {
-        "foreground": "#a9a9e9"
+        "foreground": "#7eaef5"
       }
     },
     {
@@ -582,7 +582,7 @@
     {
       "scope": "keyword.other.unit",
       "settings": {
-        "foreground": "#a9a9e9"
+        "foreground": "#7eaef5"
       }
     },
     {
@@ -603,7 +603,7 @@
     {
       "scope": "constant.sha.git-rebase",
       "settings": {
-        "foreground": "#a9a9e9"
+        "foreground": "#7eaef5"
       }
     },
     {
@@ -621,7 +621,7 @@
       "name": "this.self",
       "scope": "variable.language",
       "settings": {
-        "foreground": "#a9a9e9"
+        "foreground": "#7eaef5"
       }
     },
     {
@@ -727,7 +727,7 @@
         "variable.other.enummember"
       ],
       "settings": {
-        "foreground": "#a9a9e9"
+        "foreground": "#7eaef5"
       }
     },
     {
@@ -801,7 +801,7 @@
         "constant.other.option"
       ],
       "settings": {
-        "foreground": "#a9a9e9"
+        "foreground": "#7eaef5"
       }
     },
     {
@@ -1011,6 +1011,6 @@
     "newOperator": "#c9a8f0",
     "stringLiteral": "#ffc852",
     "customLiteral": "#8cc496",
-    "numberLiteral": "#a9a9e9"
+    "numberLiteral": "#7eaef5"
   }
 }

@@ -109,7 +109,7 @@
 .ace_constant.ace_character,
 .ace_support.ace_constant,
 .ace_variable.ace_language {
-  color: #a9a9e9;
+  color: #7eaef5;
   font-weight: normal;
 }
 .ace_constant.ace_language.ace_escape {
@@ -375,8 +375,8 @@
 .xtermBgColor3 { background-color: #ffc852; }
 .xtermColor4 { color: #f48d6e !important; }
 .xtermBgColor4 { background-color: #f48d6e; }
-.xtermColor5 { color: #a9a9e9 !important; }
-.xtermBgColor5 { background-color: #a9a9e9; }
+.xtermColor5 { color: #7eaef5 !important; }
+.xtermBgColor5 { background-color: #7eaef5; }
 .xtermColor6 { color: #86daca !important; }
 .xtermBgColor6 { background-color: #86daca; }
 .xtermColor7 { color: #fff2f0 !important; }
@@ -391,8 +391,8 @@
 .xtermBgColor11 { background-color: #ffc852; }
 .xtermColor12 { color: #f48d6e !important; }
 .xtermBgColor12 { background-color: #f48d6e; }
-.xtermColor13 { color: #a9a9e9 !important; }
-.xtermBgColor13 { background-color: #a9a9e9; }
+.xtermColor13 { color: #7eaef5 !important; }
+.xtermBgColor13 { background-color: #7eaef5; }
 .xtermColor14 { color: #86daca !important; }
 .xtermBgColor14 { background-color: #86daca; }
 .xtermColor15 { color: #fff2f0 !important; }

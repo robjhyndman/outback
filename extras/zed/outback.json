@@ -104,9 +104,9 @@
         "terminal.ansi.blue": "#f48d6e",
         "terminal.ansi.bright_blue": "#f48d6e",
         "terminal.ansi.dim_blue": "#b56f5a",
-        "terminal.ansi.magenta": "#a9a9e9",
-        "terminal.ansi.bright_magenta": "#a9a9e9",
-        "terminal.ansi.dim_magenta": "#8581aa",
+        "terminal.ansi.magenta": "#7eaef5",
+        "terminal.ansi.bright_magenta": "#7eaef5",
+        "terminal.ansi.dim_magenta": "#6985b2",
         "terminal.ansi.cyan": "#86daca",
         "terminal.ansi.bright_cyan": "#86daca",
         "terminal.ansi.dim_cyan": "#6ea196",
@@ -177,9 +177,9 @@
             "selection": "#86daca26"
           },
           {
-            "cursor": "#a9a9e9",
-            "background": "#a9a9e9",
-            "selection": "#a9a9e926"
+            "cursor": "#7eaef5",
+            "background": "#7eaef5",
+            "selection": "#7eaef526"
           },
           {
             "cursor": "#f48d6e",
@@ -212,7 +212,7 @@
             "font_weight": null
           },
           "boolean": {
-            "color": "#a9a9e9",
+            "color": "#7eaef5",
             "font_style": null,
             "font_weight": null
           },
@@ -292,7 +292,7 @@
             "font_weight": null
           },
           "number": {
-            "color": "#a9a9e9",
+            "color": "#7eaef5",
             "font_style": null,
             "font_weight": null
           },
@@ -417,12 +417,12 @@
             "font_weight": null
           },
           "variable.special": {
-            "color": "#a9a9e9",
+            "color": "#7eaef5",
             "font_style": null,
             "font_weight": null
           },
           "variant": {
-            "color": "#a9a9e9",
+            "color": "#7eaef5",
             "font_style": null,
             "font_weight": null
           },

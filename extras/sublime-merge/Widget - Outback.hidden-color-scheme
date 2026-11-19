@@ -40,11 +40,11 @@
 		},
 		{
 			"scope": "constant.language",
-			"foreground": "#a9a9e9"
+			"foreground": "#7eaef5"
 		},
 		{
 			"scope": "constant.numeric, variable.other.enummember, keyword.operator.plus.exponent, keyword.operator.minus.exponent",
-			"foreground": "#a9a9e9"
+			"foreground": "#7eaef5"
 		},
 		{
 			"scope": "constant.regexp",
@@ -131,7 +131,7 @@
 		},
 		{
 			"scope": "meta.preprocessor.numeric",
-			"foreground": "#a9a9e9"
+			"foreground": "#7eaef5"
 		},
 		{
 			"scope": "meta.structure.dictionary.key.python",
@@ -199,7 +199,7 @@
 		},
 		{
 			"scope": "keyword.other.unit",
-			"foreground": "#a9a9e9"
+			"foreground": "#7eaef5"
 		},
 		{
 			"scope": "punctuation.section.embedded.begin.php, punctuation.section.embedded.end.php",
@@ -211,7 +211,7 @@
 		},
 		{
 			"scope": "constant.sha.git-rebase",
-			"foreground": "#a9a9e9"
+			"foreground": "#7eaef5"
 		},
 		{
 			"scope": "storage.modifier.import.java, variable.language.wildcard.java, storage.modifier.package.java",
@@ -219,7 +219,7 @@
 		},
 		{
 			"scope": "variable.language",
-			"foreground": "#a9a9e9"
+			"foreground": "#7eaef5"
 		},
 		{
 			"scope": "entity.name.function, support.function, support.constant.handlebars, source.powershell variable.other.member, entity.name.operator.custom-literal",
@@ -243,7 +243,7 @@
 		},
 		{
 			"scope": "variable.other.constant, variable.other.enummember",
-			"foreground": "#a9a9e9"
+			"foreground": "#7eaef5"
 		},
 		{
 			"scope": "meta.object-literal.key",
@@ -271,7 +271,7 @@
 		},
 		{
 			"scope": "constant.character, constant.other.option",
-			"foreground": "#a9a9e9"
+			"foreground": "#7eaef5"
 		},
 		{
 			"scope": "constant.character.escape",

@@ -24,7 +24,7 @@ Outback is available for [Positron and VS Code](#positron-and-vs-code), [RStudio
 | Keywords such as `if`, `for` and `function`        | mulla-mulla `#c9a8f0`         |
 | TOML table headers such as `[tool]`                | mulla-mulla `#c9a8f0`, bold   |
 | Bold and italic text                               | wattle seed `#d9a93c`         |
-| Numbers and constants such as `TRUE` and `NULL`    | dusk `#a9a9e9`                |
+| Numbers and constants such as `TRUE` and `NULL`    | dusk `#7eaef5`                |
 | Types, classes and attribute names                 | waterhole `#86daca`           |
 | Variables and other text                           | ghost gum `#fff2f0`           |
 | Brackets, by nesting level                         | sky, desert rose, new growth  |
