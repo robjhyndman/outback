@@ -866,14 +866,19 @@ SM_GLOBAL = {
 SM_WIDGET_GLOBAL = {**SM_GLOBAL, "background": "input.background",
                     "line_highlight": "input.background", "selection_border": "input.border"}
 
-# Diff backgrounds: (palette name, alpha). The faint line tint marks a line with
-# some changes; the strong .char tint marks the changed words, and also whole added
-# or deleted lines. Ochre is darker than new-growth, so it needs more alpha.
+# Diff backgrounds: (palette name, Sublime colour adjuster, foreground adjustment).
+# The faint line tint marks a line with some changes; the strong .char tint marks the
+# changed words, and also whole added or deleted lines. Deletions are ochre, and
+# additions the grey-green of eucalyptus. The strong tints keep the hue and
+# saturation but have low lightness, so they are vivid without lightening the
+# background much. Eucalyptus is too pale to show through a see-through tint on the
+# warm background, so its faint tint is solid too. Text on the tints is lightened,
+# so dim text such as comments and Markdown markers stays readable there.
 SM_DIFF = {
-    "diff.inserted": ("new-growth", "14"),
-    "diff.inserted.char": ("new-growth", "59"),
-    "diff.deleted": ("ochre", "14"),
-    "diff.deleted.char": ("ochre", "73"),
+    "diff.inserted": ("eucalyptus", "l(20%)", "l(+ 5%)"),
+    "diff.inserted.char": ("eucalyptus", "l(35%)", "l(+ 20%)"),
+    "diff.deleted": ("ochre", "a(0.15)", "l(+ 5%)"),
+    "diff.deleted.char": ("ochre", "l(28%)", "l(+ 15%)"),
 }
 
 SM_FONT_STYLES = {"bold", "italic", "underline"}
@@ -963,8 +968,11 @@ def sublime_merge_scheme(t, palette, name, glob):
         if "fontStyle" in settings:
             out["font_style"] = " ".join(w for w in settings["fontStyle"].split() if w in SM_FONT_STYLES)
         rules.append(out)
-    for scope, (colour, alpha) in SM_DIFF.items():
-        rules.append({"scope": scope, "background": pick(palette, colour, scope) + alpha})
+    for scope, (colour, adjuster, adjust) in SM_DIFF.items():
+        rule = {"scope": scope, "background": f"color({pick(palette, colour, scope)} {adjuster})"}
+        if adjust:
+            rule["foreground_adjust"] = adjust
+        rules.append(rule)
     return sublime_json({"name": name, "author": "Rob J Hyndman",
                          "globals": {k: t.color(v) for k, v in glob.items()},
                          "rules": rules})

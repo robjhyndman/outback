@@ -350,19 +350,23 @@
 		},
 		{
 			"scope": "diff.inserted",
-			"background": "#aeda7614"
+			"background": "color(#abc4b8 l(20%))",
+			"foreground_adjust": "l(+ 5%)"
 		},
 		{
 			"scope": "diff.inserted.char",
-			"background": "#aeda7659"
+			"background": "color(#abc4b8 l(35%))",
+			"foreground_adjust": "l(+ 20%)"
 		},
 		{
 			"scope": "diff.deleted",
-			"background": "#ee7a3c14"
+			"background": "color(#ee7a3c a(0.15))",
+			"foreground_adjust": "l(+ 5%)"
 		},
 		{
 			"scope": "diff.deleted.char",
-			"background": "#ee7a3c73"
+			"background": "color(#ee7a3c l(28%))",
+			"foreground_adjust": "l(+ 15%)"
 		}
 	]
 }
