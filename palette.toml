@@ -6,12 +6,12 @@
 
 [colours]
 # Hues
-ochre = "#ee7a3c"        # red earth: errors, accents, UI links, YAML keys, cross-references, ANSI red
+ochre = "#ee7a3c"        # red earth: errors, accents, UI links, YAML, TOML and JSON keys, cross-references, ANSI red
 spinifex = "#ffc852"     # strings, headings, badges, ANSI yellow
 wattle-seed = "#d9a93c"  # bold and italic text, escapes, find matches
 sunset = "#f48d6e"       # link text, warnings, regular expressions, ANSI blue
 desert-rose = "#eaa6c6"  # inline code
-mulla-mulla = "#c9a8f0"  # keywords, storage, tags
+mulla-mulla = "#c9a8f0"  # keywords, storage, tags, TOML table headers
 dusk = "#a9a9e9"         # numbers and constants, ANSI magenta
 sky = "#94c8f0"          # operators, outermost brackets and info
 waterhole = "#86daca"    # types, classes, attribute names, ANSI cyan

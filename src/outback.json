@@ -945,6 +945,29 @@
       }
     },
     {
+      "name": "TOML and JSON keys: ochre, like YAML keys",
+      "scope": [
+        "support.type.property-name.toml",
+        "support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "$ochre"
+      }
+    },
+    {
+      "name": "TOML table headers ([table], [[array]]): bold mulla-mulla",
+      "scope": [
+        "meta.table.toml support.type.property-name.table.toml",
+        "meta.table.toml punctuation",
+        "meta.array.table.toml support.type.property-name.array.toml",
+        "meta.array.table.toml punctuation"
+      ],
+      "settings": {
+        "foreground": "$mulla-mulla",
+        "fontStyle": "bold"
+      }
+    },
+    {
       "name": "Link URLs: sage",
       "scope": [
         "markup.underline.link",

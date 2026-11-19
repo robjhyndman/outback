@@ -324,6 +324,15 @@
 			"foreground": "#ee7a3c"
 		},
 		{
+			"scope": "support.type.property-name.toml, support.type.property-name.json",
+			"foreground": "#ee7a3c"
+		},
+		{
+			"scope": "meta.table.toml support.type.property-name.table.toml, meta.table.toml punctuation, meta.array.table.toml support.type.property-name.array.toml, meta.array.table.toml punctuation",
+			"foreground": "#c9a8f0",
+			"font_style": "bold"
+		},
+		{
 			"scope": "markup.underline.link, markup.underline.link punctuation",
 			"foreground": "#8cc496"
 		},

@@ -718,6 +718,26 @@
 		</dict>
 		<dict>
 			<key>scope</key>
+			<string>support.type.property-name.toml, support.type.property-name.json</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#ee7a3c</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>meta.table.toml support.type.property-name.table.toml, meta.table.toml punctuation, meta.array.table.toml support.type.property-name.array.toml, meta.array.table.toml punctuation</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c9a8f0</string>
+				<key>fontStyle</key>
+				<string>bold</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
 			<string>markup.underline.link, markup.underline.link punctuation</string>
 			<key>settings</key>
 			<dict>
