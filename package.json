@@ -22,6 +22,26 @@
         "path": "./themes/outback.json"
       }
     ],
+    "languages": [
+      {
+        "id": "toml",
+        "filenames": [
+          "uvr.lock"
+        ]
+      },
+      {
+        "id": "json",
+        "filenames": [
+          "renv.lock"
+        ]
+      },
+      {
+        "id": "markdown",
+        "extensions": [
+          ".txt"
+        ]
+      }
+    ],
     "grammars": [
       {
         "scopeName": "outback.heading-attributes.injection",

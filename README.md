@@ -39,6 +39,11 @@ In the interface, ochre marks buttons, focus, the active tab and errors; badges 
 
 Heading labels and hidden content are styled by grammar additions in the Positron and VS Code extension.
 
+## Lock files and text files
+
+The Positron and VS Code extension opens `uvr.lock` files as TOML, `renv.lock` files as JSON, and `.txt` files as Markdown, so they are highlighted.
+TOML needs a TOML extension such as Even Better TOML.
+
 ## Install
 
 Each app has its own theme file.
