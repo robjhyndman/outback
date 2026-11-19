@@ -199,11 +199,11 @@
         ],
         "accents": [
           "#94c8f0",
-          "#d9a93c",
           "#eaa6c6",
+          "#aeda76",
           "#94c8f0",
-          "#d9a93c",
-          "#eaa6c6"
+          "#eaa6c6",
+          "#aeda76"
         ],
         "syntax": {
           "attribute": {

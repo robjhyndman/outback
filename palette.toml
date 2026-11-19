@@ -10,12 +10,12 @@ ochre = "#ee7a3c"        # red earth: errors, accents, UI links, YAML, TOML and 
 spinifex = "#ffc852"     # strings, headings, badges, ANSI yellow
 wattle-seed = "#d9a93c"  # bold and italic text, escapes, find matches
 sunset = "#f48d6e"       # link text, warnings, regular expressions, ANSI blue
-desert-rose = "#eaa6c6"  # inline code
+desert-rose = "#eaa6c6"  # inline code, second-level brackets
 mulla-mulla = "#c9a8f0"  # keywords, storage, tags, TOML table headers
 dusk = "#a9a9e9"         # numbers and constants, ANSI magenta
 sky = "#94c8f0"          # operators, outermost brackets and info
 waterhole = "#86daca"    # types, classes, attribute names, ANSI cyan
-new-growth = "#aeda76"   # added lines and git decorations, ANSI green
+new-growth = "#aeda76"   # added lines and git decorations, third-level brackets, ANSI green
 sage = "#8cc496"         # function names, link URLs, inserted text
 eucalyptus = "#abc4b8"   # maths
 

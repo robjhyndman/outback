@@ -244,19 +244,19 @@
   color: #94c8f0;
 }
 .ace_editor .ace_paren.ace_paren_color_1 {
-  color: #d9a93c;
+  color: #eaa6c6;
 }
 .ace_editor .ace_paren.ace_paren_color_2 {
-  color: #eaa6c6;
+  color: #aeda76;
 }
 .ace_editor .ace_paren.ace_paren_color_3 {
   color: #94c8f0;
 }
 .ace_editor .ace_paren.ace_paren_color_4 {
-  color: #d9a93c;
+  color: #eaa6c6;
 }
 .ace_editor .ace_paren.ace_paren_color_5 {
-  color: #eaa6c6;
+  color: #aeda76;
 }
 .ace_editor .ace_paren.ace_paren_color_6 {
   color: #94c8f0;

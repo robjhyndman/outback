@@ -27,7 +27,7 @@ Outback is available for [Positron and VS Code](#positron-and-vs-code), [RStudio
 | Numbers and constants such as `TRUE` and `NULL`    | dusk `#a9a9e9`                |
 | Types, classes and attribute names                 | waterhole `#86daca`           |
 | Variables and other text                           | ghost gum `#fff2f0`           |
-| Brackets, by nesting level                         | sky, wattle seed, desert rose |
+| Brackets, by nesting level                         | sky, desert rose, new growth  |
 
 In the interface, ochre marks buttons, focus, the active tab and errors; badges are spinifex; and added lines in diffs and git decorations are new growth `#aeda76`.
 
