@@ -23,6 +23,9 @@ package: theme
 # and the themes for other apps in extras/ from those two.
 theme:
 	python3 -I build.py
+	@# Sublime Merge doesn't notice changes behind its symlinks; touching the links does.
+	@find "$(CONFIG)/sublime-merge/Packages/User" -maxdepth 1 \
+	  -lname "$(CURDIR)/extras/sublime-merge/*" -exec touch -h {} + 2>/dev/null || true
 
 # Symlink the extras where each app looks for them, so a pull and rebuild updates them.
 CONFIG := $(or $(XDG_CONFIG_HOME),$(HOME)/.config)

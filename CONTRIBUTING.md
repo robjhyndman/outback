@@ -72,7 +72,7 @@ Zen's `userChrome.css` sets the browser's CSS colour variables from Positron col
 Sublime Merge's theme extends its built-in Merge Dark theme and sets Merge Dark's colour variables (`SM_VARS` in `build.py`) to palette colours.
 The diffs, commit messages and text fields use a Sublime colour scheme built from the token rules, as bat's is.
 Merge Dark's variables are in `Merge Dark.sublime-theme` inside `Packages/Theme - Merge.sublime-package` (a zip) in a Sublime Merge install.
-After `make theme`, switch Sublime Merge to another theme and back to load the changes.
+Sublime Merge does not notice changes to the files its symlinks point to, so `make theme` touches the symlinks to make it reload them.
 
 RStudio's editor (Ace) has its own token names, so `RSTUDIO_TOKENS` in `build.py` maps CSS selectors for them to the TextMate scope whose Positron colour each should copy.
 Two cases need `:has()`: link text is a `keyword` token, as R's `if` is, so it is picked out by the URL that follows it; and unquoted YAML values are plain text, so they take their colour from a line that has a YAML key.
