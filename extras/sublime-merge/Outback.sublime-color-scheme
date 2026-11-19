@@ -266,7 +266,7 @@
 		},
 		{
 			"scope": "keyword.operator.quantifier.regexp",
-			"foreground": "#d9a93c"
+			"foreground": "#94c8f0"
 		},
 		{
 			"scope": "constant.character, constant.other.option",
@@ -274,7 +274,7 @@
 		},
 		{
 			"scope": "constant.character.escape",
-			"foreground": "#d9a93c"
+			"foreground": "#eaa6c6"
 		},
 		{
 			"scope": "entity.name.label",

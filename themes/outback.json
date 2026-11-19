@@ -792,7 +792,7 @@
     {
       "scope": "keyword.operator.quantifier.regexp",
       "settings": {
-        "foreground": "#d9a93c"
+        "foreground": "#94c8f0"
       }
     },
     {
@@ -807,7 +807,7 @@
     {
       "scope": "constant.character.escape",
       "settings": {
-        "foreground": "#d9a93c"
+        "foreground": "#eaa6c6"
       }
     },
     {

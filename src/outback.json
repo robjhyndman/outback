@@ -791,7 +791,7 @@
     {
       "scope": "keyword.operator.quantifier.regexp",
       "settings": {
-        "foreground": "$wattle-seed"
+        "foreground": "$sky"
       }
     },
     {
@@ -806,7 +806,7 @@
     {
       "scope": "constant.character.escape",
       "settings": {
-        "foreground": "$wattle-seed"
+        "foreground": "$desert-rose"
       }
     },
     {

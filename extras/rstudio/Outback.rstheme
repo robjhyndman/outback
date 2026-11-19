@@ -113,7 +113,7 @@
   font-weight: normal;
 }
 .ace_constant.ace_language.ace_escape {
-  color: #d9a93c;
+  color: #eaa6c6;
   font-weight: normal;
 }
 .ace_string {
