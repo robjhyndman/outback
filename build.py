@@ -11,7 +11,9 @@ Positron colour keys and TextMate scopes. The RStudio theme maps RStudio's own (
 token classes onto TextMate scopes. The eza theme picks colours by palette name.
 The Zen userChrome.css sets the browser's CSS colour variables from Positron colour
 keys. The Sublime Merge theme sets Merge Dark's colour variables by palette name,
-and its colour scheme copies the token rules.
+and its colour scheme copies the token rules. The Pandoc/Quarto theme is for
+light backgrounds: it maps Pandoc token types onto TextMate scopes and darkens
+each colour, keeping its hue, to WCAG AA contrast.
 
 Usage:
     python3 -I build.py           # rewrite the generated files
@@ -37,6 +39,7 @@ EZA_OUT = ROOT / "extras/eza/theme.yml"
 RSTUDIO_OUT = ROOT / "extras/rstudio/Outback.rstheme"
 ZEN_OUT = ROOT / "extras/zen/userChrome.css"
 ZEN_PREFS_OUT = ROOT / "extras/zen/user.js"
+QUARTO_OUT = ROOT / "extras/quarto/outback-light.theme"
 
 # Header for the generated files; the Zed theme (JSON) has no room for one.
 NOTE = ["Outback: generated from themes/outback.json by build.py",
@@ -520,6 +523,135 @@ def bat(t):
              "comment": " ".join(NOTE),
              "settings": rules}
     return plistlib.dumps(theme, sort_keys=False).decode()
+
+
+# Pandoc/Quarto highlighting on a light background (rendered documents, not the editor).
+# Each colour keeps its Outback hue and is darkened in OKLCH to WCAG AA contrast.
+LIGHT_BG = "#f2f2f2"  # the code-block grey in the OTexts Quarto template
+LIGHT_RATIO = 4.5
+
+# Pandoc token type -> TextMate scope resolved against tokenColors, or "$name" for a
+# palette colour. Pandoc's R grammar tags operators (|>, +, ==) as SpecialChar, <- as
+# Other and argument names as Attribute. Darkened enough to read, sky (operators) is
+# too close to the blue of numbers, and spinifex (strings) turns mustard, so operators
+# are ochre and strings desert rose.
+PANDOC = {
+    "Normal": None,
+    "Keyword": "keyword.control",
+    "ControlFlow": "keyword.control",
+    "Import": "keyword.control.import",
+    "DataType": "entity.name.type",
+    "Extension": "entity.name.type",
+    "DecVal": "constant.numeric",
+    "BaseN": "constant.numeric",
+    "Float": "constant.numeric",
+    "Constant": "constant.language",
+    "Char": "$desert-rose",
+    "String": "$desert-rose",
+    "VerbatimString": "$desert-rose",
+    "SpecialString": "string.regexp",
+    "SpecialChar": "$ochre",
+    "Operator": "$ochre",
+    "Other": "$ochre",
+    "Function": "entity.name.function",
+    "BuiltIn": "support.function",
+    "Variable": "variable",
+    "Attribute": "variable.parameter",
+    "Preprocessor": "meta.preprocessor",
+    "Comment": "comment",
+    "Documentation": "comment.block.documentation",
+    "Annotation": "comment",
+    "CommentVar": "comment",
+    "Information": "comment",
+    "Warning": "comment",
+    "RegionMarker": "comment",
+    "Alert": "comment",
+    "Error": "invalid",
+}
+
+
+def oklab(c):
+    """#rrggbb -> OKLab (L, a, b)."""
+    lin = [int(c[k:k + 2], 16) / 255 for k in (1, 3, 5)]
+    r, g, b = (v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4 for v in lin)
+    l = (0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b) ** (1 / 3)
+    m = (0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b) ** (1 / 3)
+    s = (0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b) ** (1 / 3)
+    return (0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s,
+            1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s,
+            0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s)
+
+
+def oklab_rgb(L, a, b):
+    """OKLab -> linear sRGB channels (may fall outside 0..1)."""
+    l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3
+    m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3
+    s = (L - 0.0894841775 * a - 1.2914855480 * b) ** 3
+    return (4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+            -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+            -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s)
+
+
+def lin_hex(rgb):
+    return "#" + "".join(
+        f"{round(255 * (12.92 * v if v <= 0.0031308 else 1.055 * v ** (1 / 2.4) - 0.055)):02x}"
+        for v in (min(max(v, 0.0), 1.0) for v in rgb))
+
+
+def oklch_hex(L, C, h):
+    """The colour at lightness L and hue h, with chroma C cut back to the sRGB gamut."""
+    def fits(c):
+        return all(-1e-7 <= v <= 1 + 1e-7 for v in oklab_rgb(L, c * h[0], c * h[1]))
+    if not fits(C):
+        lo, hi = 0.0, C
+        for _ in range(30):
+            m = (lo + hi) / 2
+            lo, hi = (m, hi) if fits(m) else (lo, m)
+        C = lo
+    return lin_hex(oklab_rgb(L, C * h[0], C * h[1]))
+
+
+def darken_to(fg, bg, ratio):
+    """The lightest colour with fg's OKLCH hue (and chroma, where the gamut allows)
+    whose contrast on bg is at least ratio; fg itself if it already has that."""
+    if contrast(fg, bg) >= ratio:
+        return fg
+    L0, a, b = oklab(fg)
+    C = (a * a + b * b) ** 0.5
+    h = (a / C, b / C) if C else (0.0, 0.0)
+    lo, hi = 0.0, L0
+    for _ in range(40):
+        m = (lo + hi) / 2
+        lo, hi = (m, hi) if contrast(oklch_hex(m, C, h), bg) >= ratio else (lo, m)
+    return oklch_hex(lo, C, h)
+
+
+def pandoc_light(t, palette):
+    """Pandoc highlighting theme (.theme, JSON) for code blocks on LIGHT_BG."""
+    fg = t.color("editor.foreground")
+    text = t.color("editor.background")  # Outback's dark background is the light theme's text
+    styles = {}
+    for token, scope in sorted(PANDOC.items()):
+        if scope and scope.startswith("$"):
+            colour, fs = pick(palette, scope[1:], f"Pandoc {token}"), ""
+        else:
+            colour = t.resolve(scope, "foreground") if scope else None
+            fs = (t.resolve(scope, "fontStyle") if scope else None) or ""
+        colour = colour and colour.lower()[:7]
+        styles[token] = {
+            # Tokens in Outback's foreground colour take the theme's text colour.
+            "text-color": None if colour in (None, fg) else darken_to(colour, LIGHT_BG, LIGHT_RATIO),
+            "background-color": None,
+            "bold": "bold" in fs.split(),
+            "italic": "italic" in fs.split(),
+            "underline": "underline" in fs.split(),
+        }
+    comment = styles["Comment"]["text-color"]
+    theme = {"_comment": " ".join(NOTE),
+             "text-color": text, "background-color": LIGHT_BG,
+             "line-number-color": comment, "line-number-background-color": LIGHT_BG,
+             "text-styles": styles}
+    return json.dumps(theme, indent=2) + "\n"
 
 
 # eza: theme.yml key -> (palette name, bold). Styles merge with eza's defaults, which
@@ -1010,7 +1142,7 @@ def main():
     stale = []
     outputs = ((THEME_OUT, theme), (ZED_OUT, zed(t)), (KONSOLE_OUT, konsole(t)), (KDE_OUT, kde(t, pal)), (BAT_OUT, bat(t)),
                (EZA_OUT, eza(pal)), (RSTUDIO_OUT, rstudio(t, pal)),
-               (ZEN_OUT, zen(t)), (ZEN_PREFS_OUT, zen_prefs()),
+               (ZEN_OUT, zen(t)), (ZEN_PREFS_OUT, zen_prefs()), (QUARTO_OUT, pandoc_light(t, pal)),
                *sublime_merge(t, pal).items())
     for path, text in outputs:
         current = path.read_text() if path.exists() else None

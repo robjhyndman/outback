@@ -78,6 +78,9 @@ RStudio's editor (Ace) has its own token names, so `RSTUDIO_TOKENS` in `build.py
 Two cases need `:has()`: link text is a `keyword` token, as R's `if` is, so it is picked out by the URL that follows it; and unquoted YAML values are plain text, so they take their colour from a line that has a YAML key.
 The token names come from RStudio's mode files (`mode/*_highlight_rules`), bundled in `www/rstudio/*.cache.js` in an RStudio install.
 
+The Quarto and Pandoc theme is light, for rendered documents: `PANDOC` in `build.py` maps Pandoc's token types to TextMate scopes, or to palette colours where the Positron colour doesn't work on a light background, and `darken_to()` lowers each colour's OKLCH lightness, keeping its hue, until it has 4.5:1 contrast on `LIGHT_BG`.
+To see which token types a language produces, render a sample and look at the `<span class>` names in the HTML (`fu` is Function, `sc` SpecialChar, and so on).
+
 ### Add an app
 
 1. In `build.py`, write a function that returns the new theme file as text.

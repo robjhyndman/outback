@@ -4,6 +4,7 @@ A warm dark theme with colours inspired by Central Australia: red earth, ochre, 
 It is tuned for reading and writing Quarto documents and R code, and works well with any language.
 
 Outback is available for [Positron and VS Code](#positron-and-vs-code), [RStudio](#rstudio), [Zed](#zed), [Konsole](#konsole), [KDE Plasma](#kde-plasma), [batcat](#batcat), [eza](#eza), [Zen](#zen) and [Sublime Merge](#sublime-merge).
+A light version colours code in rendered [Quarto and Pandoc](#quarto-and-pandoc) documents.
 
 ![A Quarto document in Positron with the Outback theme, beside a terminal listing files with eza](https://raw.githubusercontent.com/robjhyndman/outback/main/images/screenshot.png)
 
@@ -162,6 +163,30 @@ done
 
 On macOS and Windows, set `d` to the `User` folder that Preferences → Browse Packages opens.
 Then choose Preferences → Edit Settings and add `"theme": "Outback.sublime-theme"`.
+
+### Quarto and Pandoc
+
+This light version is for code blocks in rendered HTML and PDF documents.
+Each colour keeps its Outback hue, darkened to at least 4.5:1 contrast (WCAG AA) on a `#f2f2f2` code background, and so more on anything lighter.
+Strings are desert rose and operators ochre, because spinifex and sky, darkened that far, turn mustard and match the blue of numbers.
+
+Download it into the project directory:
+
+```bash
+curl -fsSL -O https://raw.githubusercontent.com/robjhyndman/outback/main/extras/quarto/outback-light.theme
+```
+
+Then set it in `_quarto.yml` or the document's YAML:
+
+```yaml
+format:
+  html:
+    syntax-highlighting: outback-light.theme
+  pdf:
+    syntax-highlighting: outback-light.theme
+```
+
+With Pandoc itself, pass `--syntax-highlighting=outback-light.theme`.
 
 ## Contributing
 
