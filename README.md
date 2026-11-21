@@ -34,6 +34,8 @@ In the interface, ochre marks buttons, focus, the active tab and errors; badges 
 
 ## Quarto and Markdown
 
+R Markdown (`.Rmd`) files are highlighted in the same way as Quarto files.
+
 - Heading labels such as `{#sec-intro}` are shown in the heading colour but not bold, so they stand apart from the heading text.
 - Everything inside a `::: {.content-hidden}` div is greyed out, so hidden content is easy to spot.
 - Markup characters (the backticks around inline code and the `**` and `*` around bold and italic text) are dimmed, so the text itself stands out.

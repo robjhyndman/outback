@@ -48,6 +48,12 @@ Other `keyword.control` scopes, such as shortcode markers, are also mulla-mulla.
 
 Two small grammars in `syntaxes/` add scopes for heading labels and hidden content, and the theme colours those scopes.
 
+### R Markdown
+
+Some extensions (such as panache) register `.Rmd` files as the `rmarkdown` language without a grammar.
+`syntaxes/rmarkdown.tmLanguage.json` gives that language a grammar, `text.html.rmarkdown`, that includes the Quarto grammar, so R Markdown files get the same scopes as Quarto files.
+Its `embeddedLanguages` in `package.json` copy the Quarto extension's, and both grammar additions below are also injected into it.
+
 ### Heading labels
 
 The Quarto grammar treats `{#sec-intro}` as part of the heading text.

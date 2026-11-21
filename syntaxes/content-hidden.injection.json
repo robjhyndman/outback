@@ -1,6 +1,6 @@
 {
   "scopeName": "outback.content-hidden.injection",
-  "injectionSelector": "L:text.html.quarto -meta.content-hidden -markup.fenced_code -markup.raw -meta.embedded",
+  "injectionSelector": "L:(text.html.quarto | text.html.rmarkdown) -meta.content-hidden -markup.fenced_code -markup.raw -meta.embedded",
   "patterns": [{ "include": "#hidden-div" }],
   "repository": {
     "hidden-div": {

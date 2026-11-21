@@ -1,0 +1,4 @@
+{
+  "scopeName": "text.html.rmarkdown",
+  "patterns": [{ "include": "text.html.quarto" }]
+}
